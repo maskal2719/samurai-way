@@ -3,10 +3,6 @@
     margin: 0 auto;
 }
 
-.header-logo {
-    width: 40px;
-}
-
 .main-section {
     display: flex;
 }
@@ -14,19 +10,6 @@
 .main-content {
     width: 77%;
     background-color: aqua;
-}
-
-.nav {
-    width: 33%;
-    background-color: red;
-}
-
-.footer {
-    background-color: orange;
-}
-
-.header {
-    background-color: blue;
 }
 
 .fon {
