@@ -9,7 +9,8 @@ const MyPosts = () => {
             <div className='new-post'>
                 <input type="text"/>
             </div>
-            <Post/>
+            <Post body={'1243512461324'}/>
+            <Post body={'dgasgasd'}/>
         </div>
     );
 };
