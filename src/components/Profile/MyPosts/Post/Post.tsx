@@ -3,6 +3,7 @@ import classes from "./Post.module.css";
 
 type PostPropsType = {
     body: string
+    like : number
 }
 
 const Post = (props: PostPropsType) => {
@@ -10,10 +11,10 @@ const Post = (props: PostPropsType) => {
         <div className={classes.item}>
             <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-g0jJR5cHlHWtnGR4zPu83mjqkfXiluRUFA&usqp=CAU"
-                alt=""/>
+                alt="avatar "/>
             {props.body}
             <div>
-                <span>Like</span>
+                <span>{props.like}</span>
                 <button>delete</button>
             </div>
         </div>

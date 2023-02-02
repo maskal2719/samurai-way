@@ -5,11 +5,7 @@
 
 .main-section {
     display: flex;
-}
-
-.main-content {
-    width: 77%;
-    background-color: aqua;
+    background-color: aquamarine;
 }
 
 .fon {

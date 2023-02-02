@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Footer from "./components/Footer/Footer";
+import Dialogs from "./components/Dialogs/Dialogs";
 
 const App = () => {
     return (
@@ -11,7 +12,7 @@ const App = () => {
             <Header/>
             <section className='main-section'>
                 <Navbar/>
-                <Profile/>
+                <Dialogs/>
             </section>
             <Footer/>
         </div>

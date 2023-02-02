@@ -9,8 +9,15 @@ const MyPosts = () => {
             <div className='new-post'>
                 <input type="text"/>
             </div>
-            <Post body={'1243512461324'}/>
-            <Post body={'dgasgasd'}/>
+            <Post body={'1243512461324'} like={100}/>
+            <Post body={'dgasgasd'} like={45}/>
+            <Post body={'dgasgasd'} like={45}/>
+            <Post body={'dgasgasd'} like={45}/>
+            <Post body={'dgasgasd'} like={45}/>
+            <Post body={'dgasgasd'} like={45}/>
+            <Post body={'dgasgasd'} like={45}/>
+            <Post body={'dgasgasd'} like={45}/>
+            <Post body={'dgasgasd'} like={45}/>
         </div>
     );
 };
