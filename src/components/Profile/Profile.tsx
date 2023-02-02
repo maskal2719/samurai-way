@@ -1,4 +1,5 @@
 import React from 'react';
+import MyPosts from "./MyPosts/MyPosts";
 
 const Profile = () => {
     return (
@@ -15,15 +16,7 @@ const Profile = () => {
                     <span>27.07.1996</span>
                 </div>
             </div>
-            <div className='post'>
-                My posts
-                <div className='new-post'>
-                    <input type="text"/>
-                </div>
-                <div className='post'>
-                    Post1
-                </div>
-            </div>
+            <MyPosts/>
         </div>
     );
 };
