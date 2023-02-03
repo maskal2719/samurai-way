@@ -1,12 +1,14 @@
 .nav {
     width: 33%;
     background-color: red;
+    padding: 30px;
 }
 
-.item {
-    color: blue;
+.item a{
+    color: white;
+    text-decoration: none;
 }
 
-.item.active {
+.item a.active_link {
     color: gold;
 }
