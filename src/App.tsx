@@ -5,17 +5,27 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Footer from "./components/Footer/Footer";
 import Dialogs from "./components/Dialogs/Dialogs";
+import {BrowserRouter, Route} from "react-router-dom";
+import News from "./components/News/News";
+import Settings from "./components/Settings/Settings";
+import Music from "./components/Music/Music";
 
 const App = () => {
     return (
-        <div className="container">
-            <Header/>
-            <section className='main-section'>
-                <Navbar/>
-                <Dialogs/>
-            </section>
-            <Footer/>
-        </div>
+        <BrowserRouter>
+            <div className="container">
+                <Header/>
+                <div className='main-section'>
+                    <Navbar/>
+                    <Route path='/dialogs' component={Dialogs}/>
+                    <Route path='/profile' component={Profile}/>
+                    <Route path='/news' component={News}/>
+                    <Route path='/music' component={Music}/>
+                    <Route path='/setting' component={Settings}/>
+                </div>
+                <Footer/>
+            </div>
+        </BrowserRouter>
     );
 }
 
