@@ -7,8 +7,8 @@ const MyPosts = () => {
         <div className='post'>
             <h3>Posts</h3>
             <div className={classes.new_post}>
-                <input className={classes.input} placeholder='Enter new post)' type="text"/>
-                <button className={classes.add_button}>Add new post</button>
+                <textarea className={classes.input} > </textarea>
+                <button className={classes.add_button}>Publish</button>
             </div>
             <Post body={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa cum distinctio dolorum eius eveniet explicabo id illo modi molestias nesciunt nisi odio officia porro, praesentium quae recusandae, tempore voluptas.'} like={100}/>
             <Post body={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa cum distinctio dolorum eius eveniet explicabo id illo modi molestias nesciunt nisi odio officia porro, praesentium quae recusandae, tempore voluptas.'} like={45}/>

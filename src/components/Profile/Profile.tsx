@@ -1,6 +1,7 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import classes from "./Profile.module.css";
+import Friends from "./Friends/Friends";
 
 const Profile = () => {
     return (
@@ -17,10 +18,12 @@ const Profile = () => {
                     <div className={classes.dop_info}>
                         <div>27.07.1996</div>
                         <div>Gomel State University</div>
+                        <p className={classes.status}>Status: Hello!</p>
+                        <button>Edit</button>
                     </div>
-
                 </div>
             </div>
+            <Friends/>
             <MyPosts/>
         </div>
     );

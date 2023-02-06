@@ -22,3 +22,8 @@
 .dop_info div{
     font-size: 20px;
 }
+
+.status {
+    font-size: 20px;
+    font-style: italic;
+}
