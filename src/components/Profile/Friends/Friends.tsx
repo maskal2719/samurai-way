@@ -5,7 +5,6 @@ import Friend from "./Friend/Friend";
 const Friends = () => {
     return (
         <div className={classes.friends}>
-            My friends:
             <Friend name={'Stas'}/>
             <Friend name={'Denis'}/>
             <Friend name={'Lera'}/>
