@@ -5,12 +5,12 @@ import Friend from "./Friend/Friend";
 const Friends = () => {
     return (
         <div className={classes.friends}>
-            <Friend name={'Stas'}/>
-            <Friend name={'Denis'}/>
-            <Friend name={'Lera'}/>
-            <Friend name={'Igor'}/>
-            <Friend name={'Sasha'}/>
-            <Friend name={'Timofey'}/>
+            <Friend name={'Stas'} status={'Offline'}/>
+            <Friend name={'Denis'} status={'Online'}/>
+            <Friend name={'Lera'} status={'Offline'}/>
+            <Friend name={'Igor'} status={'Offline'}/>
+            <Friend name={'Sasha'} status={'Offline'}/>
+            <Friend name={'Timofey'} status={'Offline'}/>
         </div>
     );
 };

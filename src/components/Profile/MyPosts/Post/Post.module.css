@@ -1,6 +1,6 @@
 .item {
     display: flex;
-    border: 1px solid grey;
+    border: 1px solid #F4F4F4;
     margin-bottom: 20px;
     padding: 40px;
     gap: 30px;

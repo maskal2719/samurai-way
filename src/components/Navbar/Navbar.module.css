@@ -17,6 +17,8 @@
     width: 150px;
     margin-bottom: 20px;
     font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 6px;
 }
 
 .item:last-child{
@@ -26,7 +28,7 @@
 .item a:hover {
     transition: 2s;
     transform: scale(2);
-    color: black;
+    color: #1d60ec;
 }
 
 .item a.active_link {

@@ -3,14 +3,17 @@ import classes from "./Friend.module.css";
 
 type FriendPropsType = {
     name: string
+    status: string
 }
 const Friend : React.FC<FriendPropsType> = (props) => {
     return (
         <div className={classes.friend}>
+            <p>{props.status}</p>
             <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-g0jJR5cHlHWtnGR4zPu83mjqkfXiluRUFA&usqp=CAU"
                 alt="avatar "/>
             <p>{props.name}</p>
+
         </div>
     );
 };
