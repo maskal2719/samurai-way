@@ -1,8 +1,13 @@
 .item {
-    color: gold;
+    display: flex;
+    border: 1px solid grey;
+    margin-bottom: 20px;
+    padding: 40px;
+    gap: 30px;
+    border-radius: 20px;
 }
 
 .item img {
-    width: 50px;
+    width: 70px;
     border-radius: 20px;
 }

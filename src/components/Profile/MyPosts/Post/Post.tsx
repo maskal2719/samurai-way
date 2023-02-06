@@ -14,7 +14,7 @@ const Post : React.FC<PostPropsType> = (props) => {
                 alt="avatar "/>
             {props.body}
             <div>
-                <span>{props.like}</span>
+                <span>&#9829;{props.like}</span>
                 <button>delete</button>
             </div>
         </div>

@@ -5,19 +5,13 @@ import Post from "./Post/Post";
 const MyPosts = () => {
     return (
         <div className='post'>
-            My posts
-            <div className='new-post'>
-                <input type="text"/>
+            <h3>Posts</h3>
+            <div className={classes.new_post}>
+                <input className={classes.input} placeholder='Enter new post)' type="text"/>
+                <button className={classes.add_button}>Add new post</button>
             </div>
-            <Post body={'1243512461324'} like={100}/>
-            <Post body={'dgasgasd'} like={45}/>
-            <Post body={'dgasgasd'} like={45}/>
-            <Post body={'dgasgasd'} like={45}/>
-            <Post body={'dgasgasd'} like={45}/>
-            <Post body={'dgasgasd'} like={45}/>
-            <Post body={'dgasgasd'} like={45}/>
-            <Post body={'dgasgasd'} like={45}/>
-            <Post body={'dgasgasd'} like={45}/>
+            <Post body={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa cum distinctio dolorum eius eveniet explicabo id illo modi molestias nesciunt nisi odio officia porro, praesentium quae recusandae, tempore voluptas.'} like={100}/>
+            <Post body={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa cum distinctio dolorum eius eveniet explicabo id illo modi molestias nesciunt nisi odio officia porro, praesentium quae recusandae, tempore voluptas.'} like={45}/>
         </div>
     );
 };

@@ -1,7 +1,30 @@
 .header_logo {
-    width: 40px;
+    width: 80px;
 }
 
 .header {
-    background-color: blue;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 40px;
+}
+
+.login_btn {
+    width: 143px;
+    height: 43px;
+    background-color: #1d60ec;
+    border-radius: 25px;
+    font-size: 15px;
+    color: #FFF;
+    border: none;
+}
+
+.header_h1 {
+    font-family: Quicksand,sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #1d60ec;
+    letter-spacing: 10px;
+    font-weight: inherit;
 }

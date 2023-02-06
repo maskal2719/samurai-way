@@ -1,14 +1,30 @@
 .nav {
     width: 33%;
-    background-color: red;
+    background-color: #C2C2C2;
     padding: 30px;
+}
+
+.item {
+    color: white;
+    text-decoration: none;
+    width: 150px;
+    margin-bottom: 20px;
 }
 
 .item a{
     color: white;
     text-decoration: none;
+    width: 150px;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.item a:hover {
+    transition: 2s;
+    transform: scale(2);
+    color: black;
 }
 
 .item a.active_link {
-    color: gold;
+    color: grey;
 }
