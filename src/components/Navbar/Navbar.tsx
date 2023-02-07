@@ -9,7 +9,7 @@ const Navbar : React.FC = () => {
                 <NavLink to='/profile' activeClassName={classes.active_link}>Profile</NavLink>
             </div>
             <div className={classes.item}>
-                <NavLink to='/dialogs' activeClassName={classes.active_link}>Messages</NavLink>
+                <NavLink exact to='/dialogs' activeClassName={classes.active_link}>Messages</NavLink>
             </div>
             <div className={classes.item}>
                 <NavLink to='/news' activeClassName={classes.active_link}>News</NavLink>

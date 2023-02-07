@@ -1,0 +1,25 @@
+.dialogs {
+    display: flex;
+    width: 100%;
+}
+
+.dialogs_item{
+    width: 20%;
+}
+
+.dialogs_item .active{
+    width: 20%;
+    font-weight: bold;
+}
+
+.item {
+    padding: 10px;
+}
+
+.messages {
+    width: 80%;
+}
+
+.message {
+    padding: 10px;
+}
