@@ -1,0 +1,29 @@
+.profile_info {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 70px;
+}
+
+.profile_info img {
+    width: 200px;
+    border-radius: 50%;
+}
+.name {
+    font-size: 40px;
+}
+
+.dop_info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dop_info div{
+    font-size: 20px;
+}
+
+.status {
+    font-size: 20px;
+    font-style: italic;
+}
