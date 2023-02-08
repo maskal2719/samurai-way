@@ -3,14 +3,25 @@ import classes from "./Friends.module.css";
 import Friend from "./Friend/Friend";
 
 const Friends = () => {
+
+    type FriendsDataType = {
+        status: string
+        name: string
+    }
+
+    let friendsData: Array<FriendsDataType> = [
+        {status: 'Offline', name: 'Stas'},
+        {status: 'Offline', name: 'Denis'},
+        {status: 'Offline', name: 'Valera'},
+        {status: 'Offline', name: 'Igor'},
+        {status: 'Offline', name: 'Alex'},
+    ]
+
+    let friendsElements = friendsData.length ? friendsData.map(el => <Friend name={el.name} status={el.status}/>) : 'Друзей нет'
+
     return (
         <div className={classes.friends}>
-            <Friend name={'Stas'} status={'Offline'}/>
-            <Friend name={'Denis'} status={'Online'}/>
-            <Friend name={'Lera'} status={'Offline'}/>
-            <Friend name={'Igor'} status={'Offline'}/>
-            <Friend name={'Sasha'} status={'Offline'}/>
-            <Friend name={'Timofey'} status={'Offline'}/>
+            {friendsElements}
         </div>
     );
 };

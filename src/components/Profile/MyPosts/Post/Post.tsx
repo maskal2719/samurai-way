@@ -2,8 +2,9 @@ import React from 'react';
 import classes from "./Post.module.css";
 
 type PostPropsType = {
-    body: string
+    message: string
     like : number
+    id: number
 }
 
 const Post : React.FC<PostPropsType> = (props) => {
@@ -12,7 +13,7 @@ const Post : React.FC<PostPropsType> = (props) => {
             <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-g0jJR5cHlHWtnGR4zPu83mjqkfXiluRUFA&usqp=CAU"
                 alt="avatar "/>
-            {props.body}
+            {props.message}
             <div>
                 <span>&#9829;{props.like}</span>
                 <button>delete</button>

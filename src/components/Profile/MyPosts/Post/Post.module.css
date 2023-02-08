@@ -5,6 +5,7 @@
     padding: 40px;
     gap: 30px;
     border-radius: 20px;
+    justify-content: space-between;
 }
 
 .item img {
