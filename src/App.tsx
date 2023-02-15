@@ -32,9 +32,9 @@ const App: React.FC<AppPropsType> = (props) => {
                                render={() => <Profile state={state.profile}
                                />}
                         />
-                        <Route path='/news' component={News}/>
-                        <Route path='/music' component={Music}/>
-                        <Route path='/setting' component={Settings}/>
+                        <Route path='/news' render={() => <News/>}/>
+                        <Route path='/music' render={() => <Music/>}/>
+                        <Route path='/setting' render={() => <Settings/>}/>
                     </div>
                 </div>
                 <Footer/>
