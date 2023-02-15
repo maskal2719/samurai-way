@@ -4,19 +4,16 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Footer from "./components/Footer/Footer";
-import Dialogs, {DialogDataType, MessageDataType} from "./components/Dialogs/Dialogs";
+import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
-import {FriendsDataType} from "./components/Profile/Friends/Friends";
-import {PostDataType} from "./components/Profile/MyPosts/MyPosts";
+import state, {stateType} from "./redux/state";
+
 
 type AppPropsType = {
-    dialogsData: DialogDataType[]
-    messagesData: MessageDataType[]
-    friendsData: FriendsDataType[]
-    postsData: PostDataType[]
+    state: stateType
 }
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -28,13 +25,11 @@ const App: React.FC<AppPropsType> = (props) => {
                     <Navbar/>
                     <div className='main'>
                         <Route path='/dialogs'
-                               render={() => <Dialogs dialogsData={props.dialogsData}
-                                                      messagesData={props.messagesData}
+                               render={() => <Dialogs state={state.dialogs}
                                />}
                         />
                         <Route path='/profile'
-                               render={() => <Profile friendsData={props.friendsData}
-                                                      postsData={props.postsData}
+                               render={() => <Profile state={state.profile}
                                />}
                         />
                         <Route path='/news' component={News}/>

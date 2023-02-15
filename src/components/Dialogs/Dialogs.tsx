@@ -2,10 +2,12 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {DialogsType} from "../../redux/state";
 
 export type DialogDataType = {
     id: number
     name: string
+    avatar: string
 }
 
 export type MessageDataType = {
@@ -14,15 +16,18 @@ export type MessageDataType = {
 }
 
 export type DialogsPropsType = {
-    dialogsData : DialogDataType[]
-    messagesData: MessageDataType[]
+    state: DialogsType
 }
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    let dialogsElements = props.dialogsData.length ? props.dialogsData.map(el => <DialogItem name={el.name} id={el.id}/>) : 'Диалогов нет'
+    let dialogsElements = props.state.dialogsData.length ? props.state.dialogsData.map(el => <DialogItem name={el.name}
+                                                                                                         id={el.id}
+                                                                                                         avatar={el.avatar}
+    />) : 'Диалогов нет'
 
-    let messagesElements = props.messagesData.length ? props.messagesData.map(el => <Message message={el.message} id={el.id}/>) : 'Сообщений нет'
+    let messagesElements = props.state.messagesData.length ? props.state.messagesData.map(el => <Message
+        message={el.message} id={el.id}/>) : 'Сообщений нет'
 
     return (
         <div className={classes.dialogs}>

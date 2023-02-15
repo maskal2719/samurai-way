@@ -1,20 +1,19 @@
 import React from 'react';
-import MyPosts, {PostDataType} from "./MyPosts/MyPosts";
-import classes from "./Profile.module.css";
-import Friends, {FriendsDataType} from "./Friends/Friends";
+import MyPosts from "./MyPosts/MyPosts";
+import Friends from "./Friends/Friends";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfileType} from "../../redux/state";
 
 type ProfilePropsType = {
-    friendsData: FriendsDataType[]
-    postsData: PostDataType[]
+    state: ProfileType
 }
 
-const Profile : React.FC<ProfilePropsType> = (props) => {
+const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <Friends friendsData={props.friendsData}/>
-            <MyPosts postsData={props.postsData}/>
+            <Friends friendsData={props.state.friendsData}/>
+            <MyPosts postsData={props.state.postsData}/>
         </div>
     );
 };
