@@ -1,7 +1,7 @@
 import {DialogDataType, MessageDataType} from "../components/Dialogs/Dialogs";
 import {FriendsDataType} from "../components/Profile/Friends/Friends";
 import {PostDataType} from "../components/Profile/MyPosts/MyPosts";
-import React from "react";
+import {renderEntireTree} from "../render";
 
 export type ProfileType = {
     friendsData: Array<FriendsDataType>
@@ -62,6 +62,7 @@ export const addNewPost = (postMessage: string) => {
         like: 61
     }
     state.profile.postsData.push(newPost)
+    renderEntireTree(state)
 }
 
 export const addNewMessage = (message: string) => {
@@ -70,6 +71,7 @@ export const addNewMessage = (message: string) => {
         message: message,
     }
     state.dialogs.messagesData.push(newMessage)
+    renderEntireTree(state)
 }
 
 export default state

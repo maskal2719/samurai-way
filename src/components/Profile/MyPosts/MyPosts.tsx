@@ -13,7 +13,8 @@ type MyPostsPropsType = {
     addNewPost: (newPost: string) => void
 }
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
-    let postsElements = props.postsData.length ? props.postsData.map(el => <Post message={el.message} id={el.id}
+    let postsElements = props.postsData.length ? props.postsData.map(el => <Post message={el.message}
+                                                                                 id={el.id}
                                                                                  like={el.like}/>) : 'Постов нет';
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
@@ -21,7 +22,6 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
         const text = newPostElement.current?.value;
         text && props.addNewPost(text)
         console.log(text)
-
     }
 
     return (
