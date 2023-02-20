@@ -1,6 +1,7 @@
 import {DialogDataType, MessageDataType} from "../components/Dialogs/Dialogs";
 import {FriendsDataType} from "../components/Profile/Friends/Friends";
 import {PostDataType} from "../components/Profile/MyPosts/MyPosts";
+import React from "react";
 
 export type ProfileType = {
     friendsData: Array<FriendsDataType>
@@ -51,7 +52,24 @@ let state: stateType = {
             {id: 3, message: 'I`m fine'},
             {id: 4, message: 'And you?'},
         ],
+    },
+}
+
+export const addNewPost = (postMessage: string) => {
+    let newPost = {
+        id: state.profile.postsData.length + 1,
+        message: postMessage,
+        like: 61
     }
+    state.profile.postsData.push(newPost)
+}
+
+export const addNewMessage = (message: string) => {
+    let newMessage = {
+        id: state.profile.postsData.length + 1,
+        message: message,
+    }
+    state.dialogs.messagesData.push(newMessage)
 }
 
 export default state

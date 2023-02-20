@@ -9,11 +9,13 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
-import state, {stateType} from "./redux/state";
+import state, {addNewMessage, stateType} from "./redux/state";
 
 
 type AppPropsType = {
     state: stateType
+    addNewPost: (newPost: string)=> void
+    addNewMessage: (newMessage: string) => void
 }
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -25,11 +27,11 @@ const App: React.FC<AppPropsType> = (props) => {
                     <Navbar/>
                     <div className='main'>
                         <Route path='/dialogs'
-                               render={() => <Dialogs state={state.dialogs}
+                               render={() => <Dialogs addNewMessage={addNewMessage} state={state.dialogs}
                                />}
                         />
                         <Route path='/profile'
-                               render={() => <Profile state={state.profile}
+                               render={() => <Profile state={state.profile} addNewPost={props.addNewPost}
                                />}
                         />
                         <Route path='/news' render={() => <News/>}/>

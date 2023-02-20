@@ -17,8 +17,11 @@ const Friends: React.FC<FriendsPropsType> = (props) => {
                                                                                          status={el.status}/>) : 'Друзей нет'
 
     return (
-        <div className={classes.friends}>
-            {friendsElements}
+        <div>
+            <h4>Friends</h4>
+            <div className={classes.friends}>
+                {friendsElements}
+            </div>
         </div>
     );
 };

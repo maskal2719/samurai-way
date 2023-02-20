@@ -6,6 +6,7 @@ import {ProfileType} from "../../redux/state";
 
 type ProfilePropsType = {
     state: ProfileType
+    addNewPost: (newPost: string)=> void
 }
 
 const Profile: React.FC<ProfilePropsType> = (props) => {
@@ -13,7 +14,7 @@ const Profile: React.FC<ProfilePropsType> = (props) => {
         <div>
             <ProfileInfo/>
             <Friends friendsData={props.state.friendsData}/>
-            <MyPosts postsData={props.state.postsData}/>
+            <MyPosts postsData={props.state.postsData} addNewPost={props.addNewPost}/>
         </div>
     );
 };
