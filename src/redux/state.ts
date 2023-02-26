@@ -26,6 +26,7 @@ let state: stateType = {
             {status: 'Offline', name: 'Valera'},
             {status: 'Offline', name: 'Igor'},
             {status: 'Offline', name: 'Alex'},
+            {status: 'Offline', name: 'Miha'},
         ],
         postsData: [
             {
