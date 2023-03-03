@@ -1,6 +1,7 @@
-import React, {LegacyRef} from 'react';
+import React, {ChangeEvent, LegacyRef} from 'react';
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import {updateNewPostText} from "../../../redux/state";
 
 export type PostDataType = {
     id: number
@@ -10,25 +11,30 @@ export type PostDataType = {
 
 type MyPostsPropsType = {
     postsData: PostDataType[]
-    addNewPost: (newPost: string) => void
+    addNewPost: () => void
+    newPostText : string
+    updateNewPostText: (newText: string) => void
 }
-const MyPosts: React.FC<MyPostsPropsType> = ({postsData, addNewPost}) => {
+const MyPosts: React.FC<MyPostsPropsType> = ({postsData, addNewPost, newPostText, updateNewPostText}) => {
     let postsElements = postsData.length ? postsData.map(el => <Post message={el.message}
                                                                                  id={el.id}
                                                                                  like={el.like}/>) : 'Постов нет';
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
     const onAddPostHandler = () => {
+        addNewPost()
+    }
+
+    const onChangePost = () => {
         const text = newPostElement.current?.value;
-        text && addNewPost(text)
-        console.log(text)
+        text && updateNewPostText(text)
     }
 
     return (
         <div className='post'>
             <h3>Posts</h3>
             <div className={classes.new_post}>
-                <textarea ref={newPostElement} className={classes.input}> </textarea>
+                <textarea onChange={onChangePost} ref={newPostElement} className={classes.input} value={newPostText}/>
                 <button onClick={onAddPostHandler} className={classes.add_button}>Publish</button>
             </div>
             {postsElements}

@@ -14,11 +14,12 @@ import state, {addNewMessage, stateType} from "./redux/state";
 
 type AppPropsType = {
     state: stateType
-    addNewPost: (newPost: string)=> void
+    addNewPost: ()=> void
     addNewMessage: (newMessage: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
-const App: React.FC<AppPropsType> = ({state, addNewMessage,addNewPost}) => {
+const App: React.FC<AppPropsType> = ({state, addNewMessage,addNewPost,updateNewPostText}) => {
     return (
         <BrowserRouter>
             <div className="container">
@@ -31,7 +32,7 @@ const App: React.FC<AppPropsType> = ({state, addNewMessage,addNewPost}) => {
                                />}
                         />
                         <Route path='/profile'
-                               render={() => <Profile state={state.profile} addNewPost={addNewPost}
+                               render={() => <Profile state={state.profile} addNewPost={addNewPost} updateNewPostText={updateNewPostText}
                                />}
                         />
                         <Route path='/news' render={() => <News/>}/>

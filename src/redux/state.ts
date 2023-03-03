@@ -6,6 +6,7 @@ import {renderEntireTree} from "../render";
 export type ProfileType = {
     friendsData: Array<FriendsDataType>
     postsData: Array<PostDataType>
+    newPostText: string
 }
 
 export type DialogsType = {
@@ -37,7 +38,8 @@ let state: stateType = {
             {id: 2, message: 'How are You?', like: 52},
             {id: 3, message: 'I`m fine', like: 12},
             {id: 4, message: 'And you?', like: 151},
-        ]
+        ],
+        newPostText: 'gav-gav'
     },
     dialogs: {
         dialogsData: [
@@ -56,13 +58,19 @@ let state: stateType = {
     },
 }
 
-export const addNewPost = (postMessage: string) => {
+export const addNewPost = () => {
     let newPost = {
         id: state.profile.postsData.length + 1,
-        message: postMessage,
+        message: state.profile.newPostText,
         like: 61
     }
-    state.profile.postsData.push(newPost)
+    state.profile.postsData = [newPost,...state.profile.postsData]
+    state.profile.newPostText = ''
+    renderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profile.newPostText = newText
     renderEntireTree(state)
 }
 
