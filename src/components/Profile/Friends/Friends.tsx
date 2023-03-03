@@ -13,7 +13,8 @@ type FriendsPropsType = {
 
 const Friends: React.FC<FriendsPropsType> = ({friendsData}) => {
 
-    let friendsElements = friendsData.length ? friendsData.map(el => <Friend name={el.name}
+    let friendsElements = friendsData.length ? friendsData.map((el,index) => <Friend key={index}
+        name={el.name}
                                                                                          status={el.status}/>) : 'Друзей нет'
 
     return (

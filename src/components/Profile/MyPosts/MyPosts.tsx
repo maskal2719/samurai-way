@@ -12,13 +12,14 @@ export type PostDataType = {
 type MyPostsPropsType = {
     postsData: PostDataType[]
     addNewPost: () => void
-    newPostText : string
+    newPostText: string
     updateNewPostText: (newText: string) => void
 }
 const MyPosts: React.FC<MyPostsPropsType> = ({postsData, addNewPost, newPostText, updateNewPostText}) => {
-    let postsElements = postsData.length ? postsData.map(el => <Post message={el.message}
-                                                                                 id={el.id}
-                                                                                 like={el.like}/>) : 'Постов нет';
+    let postsElements = postsData.length ? postsData.map(el => <Post key={el.id}
+                                                                     message={el.message}
+                                                                     id={el.id}
+                                                                     like={el.like}/>) : 'Постов нет';
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
     const onAddPostHandler = () => {
