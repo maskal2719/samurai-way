@@ -9,12 +9,12 @@ type ProfilePropsType = {
     addNewPost: (newPost: string)=> void
 }
 
-const Profile: React.FC<ProfilePropsType> = (props) => {
+const Profile: React.FC<ProfilePropsType> = ({state, addNewPost}) => {
     return (
         <div>
             <ProfileInfo/>
-            <Friends friendsData={props.state.friendsData}/>
-            <MyPosts postsData={props.state.postsData} addNewPost={props.addNewPost}/>
+            <Friends friendsData={state.friendsData}/>
+            <MyPosts postsData={state.postsData} addNewPost={addNewPost}/>
         </div>
     );
 };

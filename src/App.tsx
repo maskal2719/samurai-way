@@ -18,7 +18,7 @@ type AppPropsType = {
     addNewMessage: (newMessage: string) => void
 }
 
-const App: React.FC<AppPropsType> = (props) => {
+const App: React.FC<AppPropsType> = ({state, addNewMessage,addNewPost}) => {
     return (
         <BrowserRouter>
             <div className="container">
@@ -31,7 +31,7 @@ const App: React.FC<AppPropsType> = (props) => {
                                />}
                         />
                         <Route path='/profile'
-                               render={() => <Profile state={state.profile} addNewPost={props.addNewPost}
+                               render={() => <Profile state={state.profile} addNewPost={addNewPost}
                                />}
                         />
                         <Route path='/news' render={() => <News/>}/>

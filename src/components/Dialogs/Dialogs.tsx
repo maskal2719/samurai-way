@@ -20,14 +20,14 @@ export type DialogsPropsType = {
     addNewMessage: (newMessage: string) => void
 }
 
-const Dialogs: React.FC<DialogsPropsType> = (props) => {
+const Dialogs: React.FC<DialogsPropsType> = ({state, addNewMessage}) => {
 
-    let dialogsElements = props.state.dialogsData.length ? props.state.dialogsData.map(el => <DialogItem name={el.name}
+    let dialogsElements = state.dialogsData.length ? state.dialogsData.map(el => <DialogItem name={el.name}
                                                                                                          id={el.id}
                                                                                                          avatar={el.avatar}
     />) : 'Диалогов нет'
 
-    let messagesElements = props.state.messagesData.length ? props.state.messagesData.map(el => <Message
+    let messagesElements = state.messagesData.length ? state.messagesData.map(el => <Message
         message={el.message} id={el.id}/>) : 'Сообщений нет'
 
 
@@ -35,7 +35,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     const onAddNewMessageHandler = () => {
         const newMessage = newMessageElement.current?.value;
-        newMessage && props.addNewMessage(newMessage)
+        newMessage && addNewMessage(newMessage)
         console.log(newMessage)
     }
 

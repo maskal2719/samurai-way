@@ -8,13 +8,13 @@ type DialogPropsType = {
     avatar: string
 }
 
-const DialogItem : React.FC<DialogPropsType> = (props) => {
-    let path = '/dialogs/' + props.id;
+const DialogItem : React.FC<DialogPropsType> = ({name, id, avatar}) => {
+    let path = '/dialogs/' + id;
 
     return (
         <div className={classes.dialog}>
-            <img src={props.avatar} alt="avatar_dialog"/>
-            <NavLink activeClassName={classes.active} to={path}>{props.name}</NavLink>
+            <img src={avatar} alt="avatar_dialog"/>
+            <NavLink activeClassName={classes.active} to={path}>{name}</NavLink>
         </div>
     )
 }
