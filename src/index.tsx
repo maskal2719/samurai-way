@@ -14,5 +14,5 @@ const renderEntireTree = (state: stateType) => {
 
 renderEntireTree(state)
 
-subscribe(renderEntireTree)
+subscribe(() => renderEntireTree(state))
 

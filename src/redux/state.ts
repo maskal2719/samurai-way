@@ -95,7 +95,7 @@ export const addNewMessage = () => {
     renderEntireTree()
 }
 
-export const subscribe = (observer: any) => {
+export const subscribe = (observer: () => void) => {
     renderEntireTree = observer // наблюдатель (observer) publisher-subscriber
 }
 
