@@ -1,7 +1,7 @@
 import {DialogDataType, MessageDataType} from "../components/Dialogs/Dialogs";
 import {FriendsDataType} from "../components/Profile/Friends/Friends";
 import {PostDataType} from "../components/Profile/MyPosts/MyPosts";
-import {renderEntireTree} from "../render";
+
 
 export type ProfileType = {
     friendsData: Array<FriendsDataType>
@@ -18,6 +18,10 @@ export type DialogsType = {
 export type stateType = {
     profile: ProfileType
     dialogs: DialogsType
+}
+
+let renderEntireTree = () => {
+    console.log('state changed')
 }
 
 let state: stateType = {
@@ -68,17 +72,17 @@ export const addNewPost = () => {
     }
     state.profile.postsData = [newPost,...state.profile.postsData]
     state.profile.newPostText = ''
-    renderEntireTree(state)
+    renderEntireTree()
 }
 
 export const updateNewPostText = (newText: string) => {
     state.profile.newPostText = newText
-    renderEntireTree(state)
+    renderEntireTree()
 }
 
 export const updateNewMessageText = (newMessage: string) => {
     state.dialogs.newMessageText = newMessage
-    renderEntireTree(state)
+    renderEntireTree()
 }
 
 export const addNewMessage = () => {
@@ -88,7 +92,11 @@ export const addNewMessage = () => {
     }
     state.dialogs.messagesData.push(newMessage)
     state.dialogs.newMessageText = ''
-    renderEntireTree(state)
+    renderEntireTree()
+}
+
+export const subscribe = (observer: any) => {
+    renderEntireTree = observer // наблюдатель (observer) publisher-subscriber
 }
 
 export default state

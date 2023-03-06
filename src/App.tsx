@@ -13,14 +13,13 @@ import state, {addNewMessage, stateType} from "./redux/state";
 
 
 type AppPropsType = {
-    state: stateType
     addNewPost: ()=> void
     addNewMessage: () => void
     updateNewPostText: (newText: string) => void
     updateNewMessageText: (newMessage: string) => void
 }
 
-const App: React.FC<AppPropsType> = ({state, addNewMessage,addNewPost,updateNewPostText, updateNewMessageText}) => {
+const App: React.FC<AppPropsType> = ({ addNewMessage,addNewPost,updateNewPostText, updateNewMessageText}) => {
     return (
         <BrowserRouter>
             <div className="container">
