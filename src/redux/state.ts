@@ -15,16 +15,16 @@ export type DialogsType = {
     newMessageText: string
 }
 
-export type stateType = {
+export type StateType = {
     profile: ProfileType
     dialogs: DialogsType
 }
 
-let renderEntireTree = () => {
+let renderEntireTree = (state: StateType) => {
     console.log('state changed')
 }
 
-let state: stateType = {
+let state: StateType = {
     profile: {
         friendsData: [
             {status: 'Offline', name: 'Stas'},
@@ -72,17 +72,17 @@ export const addNewPost = () => {
     }
     state.profile.postsData = [newPost,...state.profile.postsData]
     state.profile.newPostText = ''
-    renderEntireTree()
+    renderEntireTree(state)
 }
 
 export const updateNewPostText = (newText: string) => {
     state.profile.newPostText = newText
-    renderEntireTree()
+    renderEntireTree(state)
 }
 
 export const updateNewMessageText = (newMessage: string) => {
     state.dialogs.newMessageText = newMessage
-    renderEntireTree()
+    renderEntireTree(state)
 }
 
 export const addNewMessage = () => {
@@ -92,10 +92,10 @@ export const addNewMessage = () => {
     }
     state.dialogs.messagesData.push(newMessage)
     state.dialogs.newMessageText = ''
-    renderEntireTree()
+    renderEntireTree(state)
 }
 
-export const subscribe = (observer: () => void) => {
+export const subscribe = (observer: (state: StateType) => void) => {
     renderEntireTree = observer // наблюдатель (observer) publisher-subscriber
 }
 
