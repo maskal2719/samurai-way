@@ -2,7 +2,7 @@ import React, {LegacyRef} from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsType} from "../../redux/state";
+import {DialogsType, updateNewMessageText} from "../../redux/state";
 
 export type DialogDataType = {
     id: number
@@ -17,10 +17,11 @@ export type MessageDataType = {
 
 export type DialogsPropsType = {
     state: DialogsType
-    addNewMessage: (newMessage: string) => void
+    addNewMessage: () => void
+    updateNewMessageText: (newMessageText: string) => void
 }
 
-const Dialogs: React.FC<DialogsPropsType> = ({state, addNewMessage}) => {
+const Dialogs: React.FC<DialogsPropsType> = ({state, addNewMessage, updateNewMessageText}) => {
 
     let dialogsElements = state.dialogsData.length ? state.dialogsData.map(el => <DialogItem name={el.name}
                                                                                                          id={el.id}
@@ -34,9 +35,14 @@ const Dialogs: React.FC<DialogsPropsType> = ({state, addNewMessage}) => {
     const newMessageElement: LegacyRef<HTMLTextAreaElement> | undefined = React.createRef()
 
     const onAddNewMessageHandler = () => {
+        // const newMessage = newMessageElement.current?.value;
+        // state.newMessageText && addNewMessage(state.newMessageText)
+        addNewMessage()
+    }
+
+    const onChangeHandler = () => {
         const newMessage = newMessageElement.current?.value;
-        newMessage && addNewMessage(newMessage)
-        console.log(newMessage)
+        newMessage && updateNewMessageText(newMessage)
     }
 
     return (
@@ -50,7 +56,7 @@ const Dialogs: React.FC<DialogsPropsType> = ({state, addNewMessage}) => {
                 </div>
             </div>
 
-            <textarea ref={newMessageElement}></textarea>
+            <textarea value={state.newMessageText} ref={newMessageElement} onChange={onChangeHandler}></textarea>
             <button onClick={onAddNewMessageHandler}>Send message</button>
         </div>
     );

@@ -12,6 +12,7 @@ export type ProfileType = {
 export type DialogsType = {
     dialogsData: Array<DialogDataType>
     messagesData: Array<MessageDataType>
+    newMessageText: string
 }
 
 export type stateType = {
@@ -55,6 +56,7 @@ let state: stateType = {
             {id: 3, message: 'I`m fine'},
             {id: 4, message: 'And you?'},
         ],
+        newMessageText: 'New Message text'
     },
 }
 
@@ -74,12 +76,18 @@ export const updateNewPostText = (newText: string) => {
     renderEntireTree(state)
 }
 
-export const addNewMessage = (message: string) => {
+export const updateNewMessageText = (newMessage: string) => {
+    state.dialogs.newMessageText = newMessage
+    renderEntireTree(state)
+}
+
+export const addNewMessage = () => {
     let newMessage = {
         id: state.profile.postsData.length + 1,
-        message: message,
+        message: state.dialogs.newMessageText,
     }
     state.dialogs.messagesData.push(newMessage)
+    state.dialogs.newMessageText = ''
     renderEntireTree(state)
 }
 

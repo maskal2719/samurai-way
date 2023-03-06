@@ -15,11 +15,12 @@ import state, {addNewMessage, stateType} from "./redux/state";
 type AppPropsType = {
     state: stateType
     addNewPost: ()=> void
-    addNewMessage: (newMessage: string) => void
+    addNewMessage: () => void
     updateNewPostText: (newText: string) => void
+    updateNewMessageText: (newMessage: string) => void
 }
 
-const App: React.FC<AppPropsType> = ({state, addNewMessage,addNewPost,updateNewPostText}) => {
+const App: React.FC<AppPropsType> = ({state, addNewMessage,addNewPost,updateNewPostText, updateNewMessageText}) => {
     return (
         <BrowserRouter>
             <div className="container">
@@ -28,7 +29,7 @@ const App: React.FC<AppPropsType> = ({state, addNewMessage,addNewPost,updateNewP
                     <Navbar/>
                     <div className='main'>
                         <Route path='/dialogs'
-                               render={() => <Dialogs addNewMessage={addNewMessage} state={state.dialogs}
+                               render={() => <Dialogs addNewMessage={addNewMessage} state={state.dialogs} updateNewMessageText={updateNewMessageText}
                                />}
                         />
                         <Route path='/profile'
