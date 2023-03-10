@@ -8,7 +8,7 @@ type DialogPropsType = {
     avatar: string
 }
 
-const DialogItem : React.FC<DialogPropsType> = ({name, id, avatar}) => {
+const DialogItem: React.FC<DialogPropsType> = ({name, id, avatar}) => {
     let path = '/dialogs/' + id;
 
     return (

@@ -14,10 +14,10 @@ import {ActionsTypes, StateType} from "./redux/state";
 
 type AppPropsType = {
     state: StateType
-   dispatch: (action: ActionsTypes) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
-const App: React.FC<AppPropsType> = ({ state, dispatch}) => {
+const App: React.FC<AppPropsType> = ({state, dispatch}) => {
     return (
         <BrowserRouter>
             <div className="container">
@@ -26,7 +26,7 @@ const App: React.FC<AppPropsType> = ({ state, dispatch}) => {
                     <Navbar/>
                     <div className='main'>
                         <Route path='/dialogs'
-                               render={() => <Dialogs  state={state.dialogs} dispatch={dispatch}
+                               render={() => <Dialogs state={state.dialogs} dispatch={dispatch}
                                />}
                         />
                         <Route path='/profile'

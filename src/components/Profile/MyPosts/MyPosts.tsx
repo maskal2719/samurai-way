@@ -23,12 +23,12 @@ const MyPosts: React.FC<MyPostsPropsType> = ({postsData, newPostText, dispatch})
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
     const onAddPostHandler = () => {
-        dispatch({type:'ADD-POST'})
+        dispatch({type: 'ADD-POST'})
     }
 
     const onChangePost = () => {
         const text = newPostElement.current?.value;
-        text && dispatch({type: "UPDATE-NEW-POST-TEXT", newText : text})
+        text && dispatch({type: "UPDATE-NEW-POST-TEXT", newText: text})
     }
 
     return (

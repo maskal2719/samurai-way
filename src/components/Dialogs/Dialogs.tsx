@@ -23,18 +23,19 @@ export type DialogsPropsType = {
 const Dialogs: React.FC<DialogsPropsType> = ({state, dispatch}) => {
 
     let dialogsElements = state.dialogsData.length ? state.dialogsData.map(el => <DialogItem key={el.id} name={el.name}
-                                                                                                         id={el.id}
-                                                                                                         avatar={el.avatar}
+                                                                                             id={el.id}
+                                                                                             avatar={el.avatar}
     />) : 'Диалогов нет'
 
     let messagesElements = state.messagesData.length ? state.messagesData.map(el => <Message key={el.id}
-        message={el.message} id={el.id}/>) : 'Сообщений нет'
+                                                                                             message={el.message}
+                                                                                             id={el.id}/>) : 'Сообщений нет'
 
 
     const newMessageElement: LegacyRef<HTMLTextAreaElement> | undefined = React.createRef()
 
     const onAddNewMessageHandler = () => {
-        dispatch({type:'ADD-NEW-MESSAGE'})
+        dispatch({type: 'ADD-NEW-MESSAGE'})
     }
 
     const onChangeHandler = () => {

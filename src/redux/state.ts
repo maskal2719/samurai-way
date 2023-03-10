@@ -9,24 +9,20 @@ export type StoreType = {
     subscribe: (observer: (state: StateType) => void) => void
     dispatch: (action: ActionsTypes) => void
 }
-
 export type ProfileType = {
     friendsData: Array<FriendsDataType>
     postsData: Array<PostDataType>
     newPostText: string
 }
-
 export type DialogsType = {
     dialogsData: Array<DialogDataType>
     messagesData: Array<MessageDataType>
     newMessageText: string
 }
-
 export type StateType = {
     profile: ProfileType
     dialogs: DialogsType
 }
-
 type AddPostActionType = {
     type: "ADD-POST"
 
@@ -43,10 +39,11 @@ type UpdateNewMessageTextActionType = {
     newMessage: string
 }
 
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddNewMessageActionType | UpdateNewMessageTextActionType;
-
-
-
+export type ActionsTypes =
+    AddPostActionType
+    | UpdateNewPostTextActionType
+    | AddNewMessageActionType
+    | UpdateNewMessageTextActionType;
 
 const store: StoreType = {
     _state: {
@@ -138,7 +135,7 @@ const store: StoreType = {
             this._state.dialogs.messagesData.push(newMessage)
             this._state.dialogs.newMessageText = ''
             this._callSubscriber(this._state)
-        }else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
             this._state.dialogs.newMessageText = action.newMessage
             this._callSubscriber(this._state)
         }
