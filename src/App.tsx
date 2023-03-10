@@ -9,17 +9,18 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
-import state, {addNewMessage, StateType} from "./redux/state";
+import store, {StateType} from "./redux/state";
 
 
 type AppPropsType = {
+    state: StateType
     addNewPost: ()=> void
     addNewMessage: () => void
     updateNewPostText: (newText: string) => void
     updateNewMessageText: (newMessage: string) => void
 }
 
-const App: React.FC<AppPropsType> = ({ addNewMessage,addNewPost,updateNewPostText, updateNewMessageText}) => {
+const App: React.FC<AppPropsType> = ({ addNewMessage,addNewPost,updateNewPostText, updateNewMessageText, state}) => {
     return (
         <BrowserRouter>
             <div className="container">

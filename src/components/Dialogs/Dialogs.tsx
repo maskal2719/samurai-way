@@ -2,7 +2,7 @@ import React, {LegacyRef} from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsType, updateNewMessageText} from "../../redux/state";
+import {DialogsType} from "../../redux/state";
 
 export type DialogDataType = {
     id: number

@@ -1,7 +1,6 @@
 import React, {ChangeEvent, LegacyRef} from 'react';
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {updateNewPostText} from "../../../redux/state";
 
 export type PostDataType = {
     id: number
