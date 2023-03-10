@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import store , { StateType} from "./redux/state";
+import store, {StateType} from "./redux/state";
 
 
 const renderEntireTree = (state: StateType) => {
     ReactDOM.render(
-        <App state={state} addNewPost={store.addNewPost.bind(store)} addNewMessage={store.addNewMessage.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)} updateNewMessageText={store.updateNewMessageText.bind(store)}/>,
+        <App
+            state={state}
+            dispatch={store.dispatch.bind(store)}
+        />,
         document.getElementById('root')
     );
 }

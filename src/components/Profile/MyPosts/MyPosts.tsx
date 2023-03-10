@@ -1,6 +1,7 @@
 import React, {ChangeEvent, LegacyRef} from 'react';
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import {ActionsTypes} from "../../../redux/state";
 
 export type PostDataType = {
     id: number
@@ -10,11 +11,11 @@ export type PostDataType = {
 
 type MyPostsPropsType = {
     postsData: PostDataType[]
-    addNewPost: () => void
     newPostText: string
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionsTypes) => void
+
 }
-const MyPosts: React.FC<MyPostsPropsType> = ({postsData, addNewPost, newPostText, updateNewPostText}) => {
+const MyPosts: React.FC<MyPostsPropsType> = ({postsData, newPostText, dispatch}) => {
     let postsElements = postsData.length ? postsData.map(el => <Post key={el.id}
                                                                      message={el.message}
                                                                      id={el.id}
@@ -22,12 +23,12 @@ const MyPosts: React.FC<MyPostsPropsType> = ({postsData, addNewPost, newPostText
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
     const onAddPostHandler = () => {
-        addNewPost()
+        dispatch({type:'ADD-POST'})
     }
 
     const onChangePost = () => {
         const text = newPostElement.current?.value;
-        text && updateNewPostText(text)
+        text && dispatch({type: "UPDATE-NEW-POST-TEXT", newText : text})
     }
 
     return (

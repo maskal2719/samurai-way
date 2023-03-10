@@ -5,12 +5,9 @@ import {PostDataType} from "../components/Profile/MyPosts/MyPosts";
 export type StoreType = {
     _state: StateType
     getState: () => StateType
-    callSubscriber: (_state: StateType) => void
-    addNewPost: () => void
-    updateNewPostText: (newText: string) => void
-    updateNewMessageText: (newText: string) => void
-    addNewMessage: () => void
+    _callSubscriber: (_state: StateType) => void
     subscribe: (observer: (state: StateType) => void) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 export type ProfileType = {
@@ -29,6 +26,26 @@ export type StateType = {
     profile: ProfileType
     dialogs: DialogsType
 }
+
+type AddPostActionType = {
+    type: "ADD-POST"
+
+}
+type UpdateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
+type AddNewMessageActionType = {
+    type: "ADD-NEW-MESSAGE"
+}
+type UpdateNewMessageTextActionType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT'
+    newMessage: string
+}
+
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddNewMessageActionType | UpdateNewMessageTextActionType;
+
+
 
 
 const store: StoreType = {
@@ -91,41 +108,40 @@ const store: StoreType = {
             newMessageText: 'New Message text'
         },
     },
+    _callSubscriber(_state: StateType) {
+        console.log('state changed')
+    },
     getState() {
         return this._state
     },
-    callSubscriber(_state: StateType) {
-        console.log('state changed')
-    },
-    addNewPost() {
-        let newPost = {
-            id: this._state.profile.postsData.length + 1,
-            message: this._state.profile.newPostText,
-            like: 61
-        }
-        this._state.profile.postsData = [newPost, ...this._state.profile.postsData]
-        this._state.profile.newPostText = ''
-        this.callSubscriber(this._state)
-    },
-    updateNewPostText(newText: string) {
-        this._state.profile.newPostText = newText
-        this.callSubscriber(this._state)
-    },
-    updateNewMessageText(newMessage: string) {
-        this._state.dialogs.newMessageText = newMessage
-        this.callSubscriber(this._state)
-    },
-    addNewMessage() {
-        let newMessage = {
-            id: this._state.profile.postsData.length + 1,
-            message: this._state.dialogs.newMessageText,
-        }
-        this._state.dialogs.messagesData.push(newMessage)
-        this._state.dialogs.newMessageText = ''
-        this.callSubscriber(this._state)
-    },
     subscribe(observer: (state: StateType) => void) {
-        this.callSubscriber = observer // наблюдатель (observer) publisher-subscriber
+        this._callSubscriber = observer // наблюдатель (observer) publisher-subscriber
+    },
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
+            let newPost = {
+                id: this._state.profile.postsData.length + 1,
+                message: this._state.profile.newPostText,
+                like: Math.floor(Math.random() * 100)
+            }
+            this._state.profile.postsData = [newPost, ...this._state.profile.postsData]
+            this._state.profile.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profile.newPostText = action.newText
+            this._callSubscriber(this._state)
+        } else if (action.type === 'ADD-NEW-MESSAGE') {
+            let newMessage = {
+                id: this._state.profile.postsData.length + 1,
+                message: this._state.dialogs.newMessageText,
+            }
+            this._state.dialogs.messagesData.push(newMessage)
+            this._state.dialogs.newMessageText = ''
+            this._callSubscriber(this._state)
+        }else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogs.newMessageText = action.newMessage
+            this._callSubscriber(this._state)
+        }
     }
 }
 
