@@ -1,7 +1,7 @@
 import React, {ChangeEvent, LegacyRef} from 'react';
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {ActionsTypes} from "../../../redux/state";
+import {ActionsTypes, addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
 
 export type PostDataType = {
     id: number
@@ -22,21 +22,21 @@ const MyPosts: React.FC<MyPostsPropsType> = ({postsData, newPostText, dispatch})
                                                                      like={el.like}/>) : 'Постов нет';
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
-    const onAddPostHandler = () => {
-        dispatch({type: 'ADD-POST'})
+    const addPost = () => {
+        dispatch(addPostActionCreator())
     }
 
-    const onChangePost = () => {
+    const onPostChange = () => {
         const text = newPostElement.current?.value;
-        text && dispatch({type: "UPDATE-NEW-POST-TEXT", newText: text})
+        text && dispatch(updateNewPostTextActionCreator(text))
     }
 
     return (
         <div className='post'>
             <h3>Posts</h3>
             <div className={classes.new_post}>
-                <textarea onChange={onChangePost} ref={newPostElement} className={classes.input} value={newPostText}/>
-                <button onClick={onAddPostHandler} className={classes.add_button}>Publish</button>
+                <textarea onChange={onPostChange} ref={newPostElement} className={classes.input} value={newPostText}/>
+                <button onClick={addPost} className={classes.add_button}>Publish</button>
             </div>
             {postsElements}
         </div>

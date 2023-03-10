@@ -2,7 +2,12 @@ import React, {LegacyRef} from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {ActionsTypes, DialogsType} from "../../redux/state";
+import {
+    ActionsTypes,
+    addNewMessageActionCreator,
+    DialogsType,
+    updateNewMessageTextActionCreator
+} from "../../redux/state";
 
 export type DialogDataType = {
     id: number
@@ -34,13 +39,13 @@ const Dialogs: React.FC<DialogsPropsType> = ({state, dispatch}) => {
 
     const newMessageElement: LegacyRef<HTMLTextAreaElement> | undefined = React.createRef()
 
-    const onAddNewMessageHandler = () => {
-        dispatch({type: 'ADD-NEW-MESSAGE'})
+    const addNewMessageHandler = () => {
+        dispatch(addNewMessageActionCreator())
     }
 
-    const onChangeHandler = () => {
+    const onMessageChange = () => {
         const newMessage = newMessageElement.current?.value;
-        newMessage && dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', newMessage: newMessage})
+        newMessage && dispatch(updateNewMessageTextActionCreator(newMessage))
     }
 
     return (
@@ -54,8 +59,8 @@ const Dialogs: React.FC<DialogsPropsType> = ({state, dispatch}) => {
                 </div>
             </div>
 
-            <textarea value={state.newMessageText} ref={newMessageElement} onChange={onChangeHandler}></textarea>
-            <button onClick={onAddNewMessageHandler}>Send message</button>
+            <textarea value={state.newMessageText} ref={newMessageElement} onChange={onMessageChange}></textarea>
+            <button onClick={addNewMessageHandler}>Send message</button>
         </div>
     );
 };

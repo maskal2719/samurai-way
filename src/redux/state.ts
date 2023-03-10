@@ -23,27 +23,12 @@ export type StateType = {
     profile: ProfileType
     dialogs: DialogsType
 }
-type AddPostActionType = {
-    type: "ADD-POST"
-
-}
-type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
-}
-type AddNewMessageActionType = {
-    type: "ADD-NEW-MESSAGE"
-}
-type UpdateNewMessageTextActionType = {
-    type: 'UPDATE-NEW-MESSAGE-TEXT'
-    newMessage: string
-}
 
 export type ActionsTypes =
-    AddPostActionType
-    | UpdateNewPostTextActionType
-    | AddNewMessageActionType
-    | UpdateNewMessageTextActionType;
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof addNewMessageActionCreator>
+    | ReturnType<typeof updateNewMessageTextActionCreator>
 
 const store: StoreType = {
     _state: {
@@ -140,6 +125,29 @@ const store: StoreType = {
             this._callSubscriber(this._state)
         }
     }
+}
+
+export const addPostActionCreator = () => {
+    return {
+        type: 'ADD-POST'
+    } as const
+}
+export const updateNewPostTextActionCreator = (newText: string) => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT",
+        newText: newText
+    } as const
+}
+export const addNewMessageActionCreator = () => {
+    return {
+        type: 'ADD-NEW-MESSAGE'
+    } as const
+}
+export const updateNewMessageTextActionCreator = (newMessage: string) => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-TEXT",
+        newMessage: newMessage
+    } as const
 }
 
 
