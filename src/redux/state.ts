@@ -30,6 +30,11 @@ export type ActionsTypes =
     | ReturnType<typeof addNewMessageActionCreator>
     | ReturnType<typeof updateNewMessageTextActionCreator>
 
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE"
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+
 const store: StoreType = {
     _state: {
         profile: {
@@ -100,7 +105,7 @@ const store: StoreType = {
         this._callSubscriber = observer // наблюдатель (observer) publisher-subscriber
     },
     dispatch(action) {
-        if (action.type === "ADD-POST") {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: this._state.profile.postsData.length + 1,
                 message: this._state.profile.newPostText,
@@ -109,10 +114,10 @@ const store: StoreType = {
             this._state.profile.postsData = [newPost, ...this._state.profile.postsData]
             this._state.profile.newPostText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profile.newPostText = action.newText
             this._callSubscriber(this._state)
-        } else if (action.type === 'ADD-NEW-MESSAGE') {
+        } else if (action.type === ADD_NEW_MESSAGE) {
             let newMessage = {
                 id: this._state.profile.postsData.length + 1,
                 message: this._state.dialogs.newMessageText,
@@ -120,7 +125,7 @@ const store: StoreType = {
             this._state.dialogs.messagesData.push(newMessage)
             this._state.dialogs.newMessageText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
             this._state.dialogs.newMessageText = action.newMessage
             this._callSubscriber(this._state)
         }
@@ -129,23 +134,23 @@ const store: StoreType = {
 
 export const addPostActionCreator = () => {
     return {
-        type: 'ADD-POST'
+        type: ADD_POST
     } as const
 }
 export const updateNewPostTextActionCreator = (newText: string) => {
     return {
-        type: "UPDATE-NEW-POST-TEXT",
+        type: UPDATE_NEW_POST_TEXT,
         newText: newText
     } as const
 }
 export const addNewMessageActionCreator = () => {
     return {
-        type: 'ADD-NEW-MESSAGE'
+        type: ADD_NEW_MESSAGE
     } as const
 }
 export const updateNewMessageTextActionCreator = (newMessage: string) => {
     return {
-        type: "UPDATE-NEW-MESSAGE-TEXT",
+        type: UPDATE_NEW_MESSAGE_TEXT,
         newMessage: newMessage
     } as const
 }
