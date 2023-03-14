@@ -2,12 +2,8 @@ import React, {LegacyRef} from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {
-    ActionsTypes,
-    addNewMessageActionCreator,
-    DialogsType,
-    updateNewMessageTextActionCreator
-} from "../../redux/state";
+import {ActionsTypes, DialogsType} from "../../redux/state";
+import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 
 export type DialogDataType = {
     id: number
