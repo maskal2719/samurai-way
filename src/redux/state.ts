@@ -132,28 +132,11 @@ const store: StoreType = {
     }
 }
 
-export const addPostActionCreator = () => {
-    return {
-        type: ADD_POST
-    } as const
-}
-export const updateNewPostTextActionCreator = (newText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: newText
-    } as const
-}
-export const addNewMessageActionCreator = () => {
-    return {
-        type: ADD_NEW_MESSAGE
-    } as const
-}
-export const updateNewMessageTextActionCreator = (newMessage: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newMessage: newMessage
-    } as const
-}
+export const addPostActionCreator = () => ({type: ADD_POST}) as const
+export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText: newText}) as const
+export const addNewMessageActionCreator = () => ({type: ADD_NEW_MESSAGE}) as const
+export const updateNewMessageTextActionCreator = (newMessage: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessage: newMessage}) as const
+
 
 
 export default store
