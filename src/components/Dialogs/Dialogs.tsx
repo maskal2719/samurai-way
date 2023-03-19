@@ -2,7 +2,7 @@ import React, {LegacyRef} from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {ActionsTypes, DialogsType} from "../../redux/store";
+import {ActionsTypes, DialogsType, StateType, StoreType} from "../../redux/store";
 import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 
 export type DialogDataType = {
@@ -17,11 +17,13 @@ export type MessageDataType = {
 }
 
 export type DialogsPropsType = {
+    updateNewMessageTextActionCreator: (text: string) => void
+    addNewMessage: () => void
     state: DialogsType
-    dispatch: (action: ActionsTypes) => void
 }
 
-const Dialogs: React.FC<DialogsPropsType> = ({state, dispatch}) => {
+const Dialogs: React.FC<DialogsPropsType> = ({updateNewMessageTextActionCreator, addNewMessage, state}) => {
+
 
     let dialogsElements = state.dialogsData.length ? state.dialogsData.map(el => <DialogItem key={el.id} name={el.name}
                                                                                              id={el.id}
@@ -36,12 +38,12 @@ const Dialogs: React.FC<DialogsPropsType> = ({state, dispatch}) => {
     const newMessageElement: LegacyRef<HTMLTextAreaElement> | undefined = React.createRef()
 
     const addNewMessageHandler = () => {
-        dispatch(addNewMessageActionCreator())
+        addNewMessage()
     }
 
     const onMessageChange = () => {
         const newMessage = newMessageElement.current?.value;
-        newMessage && dispatch(updateNewMessageTextActionCreator(newMessage))
+        newMessage && updateNewMessageTextActionCreator(newMessage)
     }
 
     return (

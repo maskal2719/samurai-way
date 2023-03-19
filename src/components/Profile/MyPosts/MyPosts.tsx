@@ -13,23 +13,23 @@ export type PostDataType = {
 type MyPostsPropsType = {
     postsData: PostDataType[]
     newPostText: string
-    dispatch: (action: ActionsTypes) => void
-
+    updateNewPostText : (text: string) => void
+    addPost: () => void
 }
-const MyPosts: React.FC<MyPostsPropsType> = ({postsData, newPostText, dispatch}) => {
+const MyPosts: React.FC<MyPostsPropsType> = ({postsData, newPostText,updateNewPostText, addPost}) => {
     let postsElements = postsData.length ? postsData.map(el => <Post key={el.id}
                                                                      message={el.message}
                                                                      id={el.id}
                                                                      like={el.like}/>) : 'Постов нет';
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
-    const addPost = () => {
-        dispatch(addPostActionCreator())
+    const onAddPost = () => {
+        addPost()
     }
 
     const onPostChange = () => {
         const text = newPostElement.current?.value;
-        text && dispatch(updateNewPostTextActionCreator(text))
+        text && updateNewPostText(text)
     }
 
     return (
@@ -37,7 +37,7 @@ const MyPosts: React.FC<MyPostsPropsType> = ({postsData, newPostText, dispatch})
             <h3>Posts</h3>
             <div className={classes.new_post}>
                 <textarea onChange={onPostChange} ref={newPostElement} className={classes.input} value={newPostText}/>
-                <button onClick={addPost} className={classes.add_button}>Publish</button>
+                <button onClick={onAddPost} className={classes.add_button}>Publish</button>
             </div>
             {postsElements}
         </div>

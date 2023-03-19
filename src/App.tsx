@@ -9,15 +9,17 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
-import {ActionsTypes, StateType} from "./redux/store";
+import {ActionsTypes, StateType, StoreType} from "./redux/store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 type AppPropsType = {
     state: StateType
+    store: StoreType
     dispatch: (action: ActionsTypes) => void
 }
 
-const App: React.FC<AppPropsType> = ({state, dispatch}) => {
+const App: React.FC<AppPropsType> = ({state, dispatch, store}) => {
     return (
         <BrowserRouter>
             <div className="container">
@@ -26,11 +28,11 @@ const App: React.FC<AppPropsType> = ({state, dispatch}) => {
                     <Navbar/>
                     <div className='main'>
                         <Route path='/dialogs'
-                               render={() => <Dialogs state={state.dialogs} dispatch={dispatch}
+                               render={() => <DialogsContainer store={store}
                                />}
                         />
                         <Route path='/profile'
-                               render={() => <Profile state={state.profile} dispatch={dispatch}
+                               render={() => <Profile store={store}
                                />}
                         />
                         <Route path='/news' render={() => <News/>}/>
