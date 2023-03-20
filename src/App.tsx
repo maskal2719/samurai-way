@@ -14,12 +14,12 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 type AppPropsType = {
-    state: StateType
-    store: StoreType
-    dispatch: (action: ActionsTypes) => void
+    // state: StateType
+    // store: StoreType
+    // dispatch: (action: ActionsTypes) => void
 }
 
-const App: React.FC<AppPropsType> = ({state, dispatch, store}) => {
+const App: React.FC<AppPropsType> = () => {
     return (
         <BrowserRouter>
             <div className="container">
@@ -28,11 +28,11 @@ const App: React.FC<AppPropsType> = ({state, dispatch, store}) => {
                     <Navbar/>
                     <div className='main'>
                         <Route path='/dialogs'
-                               render={() => <DialogsContainer store={store}
+                               render={() => <DialogsContainer
                                />}
                         />
                         <Route path='/profile'
-                               render={() => <Profile store={store}
+                               render={() => <Profile
                                />}
                         />
                         <Route path='/news' render={() => <News/>}/>

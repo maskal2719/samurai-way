@@ -5,6 +5,7 @@ import Message from "./Message/Message";
 import {ActionsTypes, DialogsType, StoreType} from "../../redux/store";
 import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
+import StoreContext from "../../StoreContext";
 
 export type DialogDataType = {
     id: number
@@ -18,23 +19,30 @@ export type MessageDataType = {
 }
 
 export type DialogsPropsType = {
-   store: StoreType
+    // store: StoreType
 }
 
-const DialogsContainer: React.FC<DialogsPropsType> = ({store}) => {
+const DialogsContainer: React.FC<DialogsPropsType> = () => {
 
-    let state = store.getState().dialogs;
-
-    const addNewMessageHandler = () => {
-        store.dispatch(addNewMessageActionCreator())
-    }
-
-    const onMessageChange = (newMessage: string) => {
-        newMessage && store.dispatch(updateNewMessageTextActionCreator(newMessage))
-    }
 
     return (
-        <Dialogs updateNewMessageTextActionCreator={onMessageChange} addNewMessage={addNewMessageHandler} state={state}/>
+        <StoreContext.Consumer>
+            {(store) => {
+                let state = store.getState().dialogs;
+
+                const addNewMessageHandler = () => {
+                    store.dispatch(addNewMessageActionCreator())
+                }
+
+                const onMessageChange = (newMessage: string) => {
+                    newMessage && store.dispatch(updateNewMessageTextActionCreator(newMessage))
+                }
+
+                return <Dialogs updateNewMessageTextActionCreator={onMessageChange} addNewMessage={addNewMessageHandler}
+                                state={state}/>
+            }
+            }
+        </StoreContext.Consumer>
     );
 };
 

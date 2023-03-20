@@ -1,19 +1,17 @@
 import React from 'react';
-import Friends from "./Friends/Friends";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import { StoreType} from "../../redux/store";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 type ProfilePropsType = {
-    store: StoreType
+
 }
 
-const Profile: React.FC<ProfilePropsType> = ({store}) => {
+const Profile: React.FC<ProfilePropsType> = () => {
     return (
         <div>
             <ProfileInfo/>
-            <Friends friendsData={store.getState().profile.friendsData}/>
-            <MyPostsContainer store={store}/>
+            {/*<Friends friendsData={store.getState().profile.friendsData}/>*/}
+            <MyPostsContainer />
         </div>
     );
 };
