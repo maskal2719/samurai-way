@@ -4,7 +4,6 @@ import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
-import {updateNewMessageTextActionCreator} from "../../../redux/dialogs-reducer";
 
 export type PostDataType = {
     id: number
@@ -30,7 +29,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         updateNewPostText: (newPost: string) => {
-            dispatch(updateNewMessageTextActionCreator(newPost))
+            dispatch(updateNewPostTextActionCreator(newPost))
         },
         addPost: () => {
             dispatch(addPostActionCreator())

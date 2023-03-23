@@ -51,15 +51,18 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
                 message: state.newPostText,
                 like: Math.floor(Math.random() * 100)
             }
-            state.postsData = [newPost, ...state.postsData]
-            state.newPostText = ''
-            return state
+            return {
+                ...state,
+                postsData: [newPost, ...state.postsData],
+                newPostText: ''
+            }
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText
-            return state
+            return {
+                ...state,
+                newPostText: action.newText
+            }
         default:
             return state
-
     }
 }
 

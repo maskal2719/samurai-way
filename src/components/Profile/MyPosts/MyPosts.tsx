@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import { PostDataType} from "../../../redux/profile-reducer";
 import {DialogsPropsType} from "./MyPostsContainer";
 
 const MyPosts: React.FC<DialogsPropsType> = ({postsData, newPostText,updateNewPostText, addPost}) => {
