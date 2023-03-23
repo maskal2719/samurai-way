@@ -1,8 +1,15 @@
-import {DialogDataType, MessageDataType} from "../components/Dialogs/Dialogs";
-import {FriendsDataType} from "../components/Profile/Friends/Friends";
-import {PostDataType} from "../components/Profile/MyPosts/MyPosts";
-import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
-import dialogsReducer, {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
+import {MessageDataType} from "../components/Dialogs/Dialogs";
+import profileReducer, {
+    addPostActionCreator,
+    FriendsDataType,
+    PostDataType,
+    updateNewPostTextActionCreator
+} from "./profile-reducer";
+import dialogsReducer, {
+    addNewMessageActionCreator,
+    DialogDataType,
+    updateNewMessageTextActionCreator
+} from "./dialogs-reducer";
 
 export type StoreType = {
     _state: StateType
@@ -16,7 +23,7 @@ export type ProfileType = {
     postsData: Array<PostDataType>
     newPostText: string
 }
-export type DialogsType = {
+type DialogsType = {
     dialogsData: Array<DialogDataType>
     messagesData: Array<MessageDataType>
     newMessageText: string
@@ -103,7 +110,9 @@ const store: StoreType = {
         this._callSubscriber = observer // наблюдатель (observer) publisher-subscriber
     },
     dispatch(action) {
+        // @ts-ignore
         this._state.profile = profileReducer(this._state.profile, action)
+        // @ts-ignore
         this._state.dialogs = dialogsReducer(this._state.dialogs, action)
 
         this._callSubscriber(this._state)

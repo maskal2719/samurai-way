@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {StateType} from "./redux/store";
 import {store} from "./redux/redux-store";
-import StoreContext, { Provider } from "./StoreContext";
+import { Provider } from 'react-redux';
+import {StateType} from "./redux/store";
 
 
 const renderEntireTree = (state: StateType) => {

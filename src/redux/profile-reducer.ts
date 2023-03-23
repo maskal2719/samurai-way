@@ -1,10 +1,28 @@
-import {ActionsTypes, ProfileType, StateType} from "./store";
+export type PostDataType = {
+    id: number
+    message: string
+    like: number
+}
+export type FriendsDataType = {
+    status: string
+    name: string
+}
+
+export type InitialStateType = {
+    friendsData: Array<FriendsDataType>
+    postsData: Array<PostDataType>
+    newPostText: string
+}
+
+export type ActionsType =
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
 
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 
-let initialState: ProfileType = {
+let initialState: InitialStateType = {
     friendsData: [
         {status: 'Offline', name: 'Stas'},
         {status: 'Offline', name: 'Denis'},
@@ -25,7 +43,7 @@ let initialState: ProfileType = {
     ],
     newPostText: 'gav-gav'
 }
-const profileReducer = (state: ProfileType = initialState, action: ActionsTypes) => {
+const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -39,12 +57,16 @@ const profileReducer = (state: ProfileType = initialState, action: ActionsTypes)
         case UPDATE_NEW_POST_TEXT:
             state.newPostText = action.newText
             return state
-        default: return state
+        default:
+            return state
 
     }
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST}) as const
-export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText: newText}) as const
+export const updateNewPostTextActionCreator = (newText: string) => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newText: newText
+}) as const
 
 export default profileReducer

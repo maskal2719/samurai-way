@@ -1,22 +1,10 @@
-import React, {ChangeEvent, LegacyRef} from 'react';
+import React from 'react';
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {ActionsTypes} from "../../../redux/store";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
+import { PostDataType} from "../../../redux/profile-reducer";
+import {DialogsPropsType} from "./MyPostsContainer";
 
-export type PostDataType = {
-    id: number
-    message: string
-    like: number
-}
-
-type MyPostsPropsType = {
-    postsData: PostDataType[]
-    newPostText: string
-    updateNewPostText : (text: string) => void
-    addPost: () => void
-}
-const MyPosts: React.FC<MyPostsPropsType> = ({postsData, newPostText,updateNewPostText, addPost}) => {
+const MyPosts: React.FC<DialogsPropsType> = ({postsData, newPostText,updateNewPostText, addPost}) => {
     let postsElements = postsData.length ? postsData.map(el => <Post key={el.id}
                                                                      message={el.message}
                                                                      id={el.id}

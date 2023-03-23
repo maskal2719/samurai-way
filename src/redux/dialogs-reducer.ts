@@ -1,10 +1,24 @@
-import {ActionsTypes, DialogsType, StateType} from "./store";
-import profileReducer from "./profile-reducer";
+import {MessageDataType} from "../components/Dialogs/Dialogs";
 
 const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE"
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 
-let initialState = {
+export type DialogDataType = {
+    id: number
+    name: string
+    avatar: string
+}
+
+export type InitialStateType = {
+    dialogsData: Array<DialogDataType>
+    messagesData: Array<MessageDataType>
+    newMessageText: string
+}
+export type ActionsType =
+    ReturnType<typeof addNewMessageActionCreator>
+    | ReturnType<typeof updateNewMessageTextActionCreator>
+
+let initialState: InitialStateType = {
     dialogsData: [
         {
             id: 1,
@@ -40,8 +54,7 @@ let initialState = {
     ],
     newMessageText: 'New Message text'
 }
-const dialogsReducer = (state: DialogsType = initialState, action: ActionsTypes) => {
-
+const dialogsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case ADD_NEW_MESSAGE:
             let newMessage = {
@@ -59,6 +72,9 @@ const dialogsReducer = (state: DialogsType = initialState, action: ActionsTypes)
     }
 }
 export const addNewMessageActionCreator = () => ({type: ADD_NEW_MESSAGE}) as const
-export const updateNewMessageTextActionCreator = (newMessage: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessage: newMessage}) as const
+export const updateNewMessageTextActionCreator = (newMessage: string) => ({
+    type: UPDATE_NEW_MESSAGE_TEXT,
+    newMessage: newMessage
+}) as const
 
 export default dialogsReducer

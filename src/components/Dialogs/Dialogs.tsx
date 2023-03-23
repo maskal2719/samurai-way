@@ -2,10 +2,9 @@ import React, {LegacyRef} from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {ActionsTypes, DialogsType, StateType, StoreType} from "../../redux/store";
-import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
+import {DialogsPropsType} from "./DialogsContainer";
 
-export type DialogDataType = {
+type DialogDataType = {
     id: number
     name: string
     avatar: string
@@ -16,21 +15,16 @@ export type MessageDataType = {
     id: number
 }
 
-export type DialogsPropsType = {
-    updateNewMessageTextActionCreator: (text: string) => void
-    addNewMessage: () => void
-    state: DialogsType
-}
 
-const Dialogs: React.FC<DialogsPropsType> = ({updateNewMessageTextActionCreator, addNewMessage, state}) => {
+const Dialogs: React.FC<DialogsPropsType> = ({updateNewMessageText, addNewMessage, dialogsPage}) => {
 
 
-    let dialogsElements = state.dialogsData.length ? state.dialogsData.map(el => <DialogItem key={el.id} name={el.name}
+    let dialogsElements = dialogsPage.dialogsData.length ? dialogsPage.dialogsData.map(el => <DialogItem key={el.id} name={el.name}
                                                                                              id={el.id}
                                                                                              avatar={el.avatar}
     />) : 'Диалогов нет'
 
-    let messagesElements = state.messagesData.length ? state.messagesData.map(el => <Message key={el.id}
+    let messagesElements = dialogsPage.messagesData.length ? dialogsPage.messagesData.map(el => <Message key={el.id}
                                                                                              message={el.message}
                                                                                              id={el.id}/>) : 'Сообщений нет'
 
@@ -43,7 +37,7 @@ const Dialogs: React.FC<DialogsPropsType> = ({updateNewMessageTextActionCreator,
 
     const onMessageChange = () => {
         const newMessage = newMessageElement.current?.value;
-        newMessage && updateNewMessageTextActionCreator(newMessage)
+        newMessage && updateNewMessageText(newMessage)
     }
 
     return (
@@ -57,7 +51,7 @@ const Dialogs: React.FC<DialogsPropsType> = ({updateNewMessageTextActionCreator,
                 </div>
             </div>
 
-            <textarea value={state.newMessageText} ref={newMessageElement} onChange={onMessageChange}></textarea>
+            <textarea value={dialogsPage.newMessageText} ref={newMessageElement} onChange={onMessageChange}></textarea>
             <button onClick={addNewMessageHandler}>Send message</button>
         </div>
     );
