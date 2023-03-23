@@ -1,14 +1,10 @@
 import {MessageDataType} from "../components/Dialogs/Dialogs";
 
-const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE"
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
-
 export type DialogDataType = {
     id: number
     name: string
     avatar: string
 }
-
 export type InitialStateType = {
     dialogsData: Array<DialogDataType>
     messagesData: Array<MessageDataType>
@@ -17,6 +13,9 @@ export type InitialStateType = {
 export type ActionsType =
     ReturnType<typeof addNewMessageActionCreator>
     | ReturnType<typeof updateNewMessageTextActionCreator>
+
+const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE"
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 
 let initialState: InitialStateType = {
     dialogsData: [
