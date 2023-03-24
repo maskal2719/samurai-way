@@ -49,8 +49,8 @@ let initialState: InitialStateType = {
         //         country: 'Belarus'
         //     },
         //     followed: true
-        // },
-    ]
+        // }
+    ] as Array<UsersDataType>
 }
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -74,6 +74,9 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
             return {
                 ...state, users: [...state.users, ...action.users]
             }
+        }
+        default : {
+            return state
         }
     }
 }

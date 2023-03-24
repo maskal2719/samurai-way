@@ -44,13 +44,13 @@ let initialState: InitialStateType = {
             name: 'Haler',
             avatar: 'https://i.guim.co.uk/img/media/c2c9873e5392548d689c093b075b12869a3574a0/886_345_3512_2107/master/3512.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=389ccb5cb8d64346686652b17013a324'
         },
-    ],
+    ] as Array<DialogDataType>,
     messagesData: [
         {id: 1, message: 'Hello my friend'},
         {id: 2, message: 'How are You?'},
         {id: 3, message: 'I`m fine'},
         {id: 4, message: 'And you?'},
-    ],
+    ] as Array<MessageDataType>,
     newMessageText: 'New Message text'
 }
 const dialogsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {

@@ -30,7 +30,7 @@ let initialState: InitialStateType = {
         {status: 'Offline', name: 'Igor'},
         {status: 'Offline', name: 'Alex'},
         {status: 'Offline', name: 'Miha'},
-    ],
+    ] as Array<FriendsDataType>,
     postsData: [
         {
             id: 1,
@@ -40,7 +40,7 @@ let initialState: InitialStateType = {
         {id: 2, message: 'How are You?', like: 52},
         {id: 3, message: 'I`m fine', like: 12},
         {id: 4, message: 'And you?', like: 151},
-    ],
+    ] as Array<PostDataType>,
     newPostText: 'gav-gav'
 }
 const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
