@@ -1,49 +1,23 @@
 import React from 'react';
 import classes from 'Users.module.css'
 import {UsersPropsType} from "./UsersContainer";
+import axios from "axios";
+import userPhoto from '../../assets/images/user.jpg'
 
 const Users: React.FC<UsersPropsType> = ({users, setUsers, unfollow, follow}) => {
+    const urlUsers = 'https://social-network.samuraijs.com/api/1.0/users'
 
     if (users.length === 0) {
-        setUsers([{
-            id: 1,
-            fullName: 'Den',
-            status: 'I`m fine',
-            avatar: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p209243.png',
-            location: {
-                city: 'Gomel',
-                country: 'Belarus'
-            },
-            followed: true
-        },
-            {
-                id: 2,
-                fullName: 'Lexa',
-                status: 'I`m fine',
-                avatar: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p209243.png',
-                location: {
-                    city: 'Mozir',
-                    country: 'Belarus'
-                },
-                followed: false
-            },
-            {
-                id: 3,
-                fullName: 'Dimon',
-                status: 'I`m fine',
-                avatar: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p209243.png',
-                location: {
-                    city: 'Parichi',
-                    country: 'Belarus'
-                },
-                followed: true
-            }])
+        axios.get(urlUsers)
+            .then(response => {
+                setUsers(response.data.items)
+            })
     }
 
     let usersElement = users.length > 0 ? users.map(el =>
         <div key={el.id}>
-            <img style={{width: '80px'}} src={el.avatar} alt="avatar"/>
-            {el.fullName}
+            <img style={{width: '80px'}} src={el.photos.small !== null ? el.photos.small : userPhoto} alt="avatar"/>
+            {el.name}
             {!el.followed
                 ? <button onClick={() => follow(el.id)}>Follow</button>
                 : <button onClick={() => unfollow(el.id)}>Unfollow</button>
