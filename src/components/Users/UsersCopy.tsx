@@ -19,7 +19,7 @@ class UsersCopy extends React.Component<UsersPropsType> {
                     <div key={el.id}>
 
                         <img style={{width: '80px'}} src={el.photos.small !== null ? el.photos.small : userPhoto}
-                             alt="avatar"/>
+                             alt="user_avatar"/>
                         {el.name}
                         {!el.followed
                             ? <button onClick={() => this.props.follow(el.id)}>Follow</button>
