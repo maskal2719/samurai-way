@@ -25,7 +25,7 @@ const App = () => {
                                />}
                         />
                         <Route path='/profile'
-                               render={() => <Profile
+                               render={() => <Profilee
                                />}
                         />
                         <Route path='/users'
