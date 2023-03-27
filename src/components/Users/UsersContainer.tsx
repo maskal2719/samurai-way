@@ -1,10 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
-import Users from "./Users";
 import {AppStateType} from "../../redux/redux-store";
 import {followAC, setUsersAC, unfollowAC, UsersDataType} from "../../redux/users-reducer";
 import {Dispatch} from "redux";
-import UsersCopy from "./UsersCopy";
+import Users from "./Users";
 
 
 type MapStatePropsType = {
@@ -36,4 +35,4 @@ let mapDispatchProps = (dispatch: Dispatch): MapDispatchPropsType => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchProps)(UsersCopy);
+export default connect(mapStateToProps, mapDispatchProps)(Users);
