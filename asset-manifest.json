@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/maskal2719/samurai-way/static/css/main.fbb0418a.css",
+    "main.js": "/maskal2719/samurai-way/static/js/main.85d8ca42.js",
+    "index.html": "/maskal2719/samurai-way/index.html",
+    "main.fbb0418a.css.map": "/maskal2719/samurai-way/static/css/main.fbb0418a.css.map",
+    "main.85d8ca42.js.map": "/maskal2719/samurai-way/static/js/main.85d8ca42.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fbb0418a.css",
+    "static/js/main.85d8ca42.js"
+  ]
+}
