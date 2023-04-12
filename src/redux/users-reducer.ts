@@ -1,3 +1,5 @@
+import users from "../components/Users/Users";
+
 export type UserPhotoType = {
     small: string
     large: string
@@ -5,56 +7,35 @@ export type UserPhotoType = {
 export type UsersDataType = {
     name: string,
     id: number,
-    uniqueUrlName : string,
-    photos : UserPhotoType
+    uniqueUrlName: string,
+    photos: UserPhotoType
     status: string,
     followed: boolean
 }
 export type InitialStateType = {
     users: Array<UsersDataType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
-export type ActionsType = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC> | ReturnType<typeof setUsersAC>
+export type ActionsType =
+    ReturnType<typeof followAC>
+    | ReturnType<typeof unfollowAC>
+    | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
 
 let initialState: InitialStateType = {
-    users: [
-        // {
-        //     id: 1,
-        //     fullName: 'Den',
-        //     status: 'I`m fine',
-        //     avatar: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p209243.png',
-        //     location: {
-        //         city: 'Gomel',
-        //         country: 'Belarus'
-        //     },
-        //     followed: true
-        // },
-        // {
-        //     id: 2,
-        //     fullName: 'Lexa',
-        //     status: 'I`m fine',
-        //     avatar: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p209243.png',
-        //     location: {
-        //         city: 'Mozir',
-        //         country: 'Belarus'
-        //     },
-        //     followed: false
-        // },
-        // {
-        //     id: 3,
-        //     fullName: 'Dimon',
-        //     status: 'I`m fine',
-        //     avatar: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p209243.png',
-        //     location: {
-        //         city: 'Parichi',
-        //         country: 'Belarus'
-        //     },
-        //     followed: true
-        // }
-    ] as Array<UsersDataType>
+    users: [] as Array<UsersDataType>,
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 
 const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -75,6 +56,16 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
                 ...state, users: action.users
             }
         }
+        case SET_CURRENT_PAGE : {
+            return {
+                ...state, currentPage: action.currentPage
+            }
+        }
+        case SET_TOTAL_USERS_COUNT: {
+            return  {
+                ...state, totalUsersCount : action.totalUsersCount
+            }
+        }
         default : {
             return state
         }
@@ -84,5 +75,7 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
 export const followAC = (userId: number) => ({type: FOLLOW, userId}) as const
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId}) as const
 export const setUsersAC = (users: Array<UsersDataType>) => ({type: SET_USERS, users}) as const
+export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage}) as const
+export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount}) as const
 
 export default usersReducer
