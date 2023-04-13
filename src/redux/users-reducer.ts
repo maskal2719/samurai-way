@@ -1,5 +1,3 @@
-import users from "../components/Users/Users";
-
 export type UserPhotoType = {
     small: string
     large: string
@@ -62,8 +60,8 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
             }
         }
         case SET_TOTAL_USERS_COUNT: {
-            return  {
-                ...state, totalUsersCount : action.totalUsersCount
+            return {
+                ...state, totalUsersCount: action.totalUsersCount
             }
         }
         default : {
@@ -76,6 +74,9 @@ export const followAC = (userId: number) => ({type: FOLLOW, userId}) as const
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId}) as const
 export const setUsersAC = (users: Array<UsersDataType>) => ({type: SET_USERS, users}) as const
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage}) as const
-export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount}) as const
+export const setTotalUsersCount = (totalUsersCount: number) => ({
+    type: SET_TOTAL_USERS_COUNT,
+    totalUsersCount: totalUsersCount
+}) as const
 
 export default usersReducer
