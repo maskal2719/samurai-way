@@ -7,20 +7,46 @@ export type FriendsDataType = {
     status: string
     name: string
 }
+export type ProfileType = {
+    aboutMe: string
+    contacts: Contacts
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: Photos
+}
+export type Contacts = {
+    facebook: string
+    website: any
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: any
+    github: string
+    mainLink: any
+}
+export type Photos = {
+    small: string
+    large: string
+}
 
 export type InitialStateType = {
     friendsData: Array<FriendsDataType>
     postsData: Array<PostDataType>
     newPostText: string
+    profile: ProfileType | null
 }
 
 export type ActionsType =
     ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof setUserProfile>
 
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+const SET_USER_PROFILE = "SET_USER_PROFILE"
 
 let initialState: InitialStateType = {
     friendsData: [
@@ -41,7 +67,8 @@ let initialState: InitialStateType = {
         {id: 3, message: 'I`m fine', like: 12},
         {id: 4, message: 'And you?', like: 151},
     ] as Array<PostDataType>,
-    newPostText: 'gav-gav'
+    newPostText: 'gav-gav',
+    profile : null
 }
 const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -61,6 +88,11 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
                 ...state,
                 newPostText: action.newText
             }
+        case SET_USER_PROFILE: {
+            return {
+                ...state, profile: action.profile
+            }
+        }
         default:
             return state
     }
@@ -71,5 +103,6 @@ export const updateNewPostTextActionCreator = (newText: string) => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: newText
 }) as const
+export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile: profile}) as const
 
 export default profileReducer

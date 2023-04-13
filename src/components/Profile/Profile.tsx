@@ -1,12 +1,12 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {ProfilePropsType} from "./ProfileInfo/ProfileContainer";
 
-const Profile = () => {
+const Profile: React.FC<ProfilePropsType> = ({profile}) => {
     return (
         <div>
-            <ProfileInfo/>
-            {/*<Friends friendsData={store.getState().profile.friendsData}/>*/}
+            <ProfileInfo profile={profile}/>
             <MyPostsContainer />
         </div>
     );
