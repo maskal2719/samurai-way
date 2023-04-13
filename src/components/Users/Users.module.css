@@ -1,3 +1,11 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
 .users {
     display: flex;
     flex-wrap: wrap;
@@ -12,4 +20,15 @@
 
 .selectedPage {
     font-weight: bold;
+}
+
+.pagination {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pagination span {
+    cursor: pointer;
 }

@@ -11,6 +11,7 @@ type UsersPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     onPageChanged: (currentPage: number) => void
+    isFetching: boolean
 }
 
 const Users: React.FC<UsersPropsType> = ({
@@ -20,7 +21,8 @@ const Users: React.FC<UsersPropsType> = ({
                                              users,
                                              follow,
                                              unfollow,
-                                             onPageChanged
+                                             onPageChanged,
+                                             isFetching
                                          }) => {
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -30,7 +32,7 @@ const Users: React.FC<UsersPropsType> = ({
     }
 
     return (
-        <>
+        <div className={classes.content}>
             <div className={classes.users}>
                 {users.length > 0 ? users.map(el =>
                     <div key={el.id} className={classes.user}>
@@ -45,7 +47,7 @@ const Users: React.FC<UsersPropsType> = ({
                     </div>
                 ) : <div>У тебя Нет друзей,потому что ты мудак :)))</div>}
             </div>
-            <div>
+            <div className={classes.pagination}>
                 {
                     pages.map((el) => <span key={el} onClick={() => {
                         onPageChanged(el)
@@ -53,7 +55,7 @@ const Users: React.FC<UsersPropsType> = ({
                 }
                 <span className={classes.selectedPage}></span>
             </div>
-        </>
+        </div>
     );
 };
 
