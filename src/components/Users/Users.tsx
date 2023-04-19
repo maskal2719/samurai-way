@@ -4,6 +4,7 @@ import userPhoto from "../../assets/images/user.jpg";
 import {UsersDataType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -45,15 +46,9 @@ const Users: React.FC<UsersPropsType> = ({
                         {el.name}
                         {!el.followed
                             ? <button onClick={
-                                () =>
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
-                                    withCredentials: true,
-                                    headers : {
-                                        'API-KEY' : 'fe6f47e1-85b3-410d-a710-52547d7fe962'
-                                    }
-                                })
-                                    .then(response => {
-                                        if (response.data.resultCode === 0) {
+                                () => usersAPI.setFollow(el.id)
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
                                             follow(el.id)
                                         }
                                     })
@@ -61,14 +56,9 @@ const Users: React.FC<UsersPropsType> = ({
                             }
                             >Follow</button>
                             : <button onClick={() =>
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,{
-                                    withCredentials: true,
-                                    headers : {
-                                        'API-KEY' : 'fe6f47e1-85b3-410d-a710-52547d7fe962'
-                                    }
-                                })
-                                    .then(response => {
-                                        if (response.data.resultCode === 0) {
+                                usersAPI.setUnfollow(el.id)
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
                                             unfollow(el.id)
                                         }
                                     })
