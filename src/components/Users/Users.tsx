@@ -35,7 +35,7 @@ const Users: React.FC<UsersPropsType> = ({
     return (
         <div className={classes.content}>
             <div className={classes.users}>
-                {users.length > 0 ? users.map(el =>
+                {users.length > 1 ? users.map(el =>
                     <div key={el.id} className={classes.user}>
                         <NavLink to={'/profile/' + el.id}>
                             <img style={{width: '80px'}} src={el.photos.small !== null ? el.photos.small : userPhoto}
