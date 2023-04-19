@@ -10,13 +10,14 @@ import Music from "./components/Music/Music";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileInfo/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 const App = () => {
     return (
         <BrowserRouter>
             <div className="container">
-                <Header/>
+                <HeaderContainer/>
                 <div className='main-section'>
                     <Navbar/>
                     <div className='main'>
