@@ -3,6 +3,7 @@ import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import {UsersDataType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -43,8 +44,35 @@ const Users: React.FC<UsersPropsType> = ({
                         </NavLink>
                         {el.name}
                         {!el.followed
-                            ? <button onClick={() => follow(el.id)}>Follow</button>
-                            : <button onClick={() => unfollow(el.id)}>Unfollow</button>
+                            ? <button onClick={
+                                () =>
+                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
+                                    withCredentials: true,
+                                    headers : {
+                                        'API-KEY' : 'fe6f47e1-85b3-410d-a710-52547d7fe962'
+                                    }
+                                })
+                                    .then(response => {
+                                        if (response.data.resultCode === 0) {
+                                            follow(el.id)
+                                        }
+                                    })
+
+                            }
+                            >Follow</button>
+                            : <button onClick={() =>
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,{
+                                    withCredentials: true,
+                                    headers : {
+                                        'API-KEY' : 'fe6f47e1-85b3-410d-a710-52547d7fe962'
+                                    }
+                                })
+                                    .then(response => {
+                                        if (response.data.resultCode === 0) {
+                                            unfollow(el.id)
+                                        }
+                                    })
+                            }>Unfollow</button>
                         }
                     </div>
                 ) : <div>У тебя Нет друзей,потому что ты мудак :)))</div>}
