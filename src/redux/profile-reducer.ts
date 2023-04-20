@@ -1,3 +1,8 @@
+import {Dispatch} from "redux";
+import axios from "axios";
+import {usersAPI} from "../api/api";
+import {setAuthUserData} from "./auth-reducer";
+
 export type PostDataType = {
     id: number
     message: string
@@ -68,7 +73,7 @@ let initialState: InitialStateType = {
         {id: 4, message: 'And you?', like: 151},
     ] as Array<PostDataType>,
     newPostText: 'gav-gav',
-    profile : null
+    profile: null
 }
 const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -104,5 +109,13 @@ export const updateNewPostTextActionCreator = (newText: string) => ({
     newText: newText
 }) as const
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile: profile}) as const
+export const getProfileThunkCreator = (userId: string | number) => {
+    return (dispatch: Dispatch) => {
+        usersAPI.getProfile(userId)
+            .then(data => {
+                    dispatch(setUserProfile(data))
+            })
+    }
+}
 
 export default profileReducer
