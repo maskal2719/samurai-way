@@ -5,7 +5,7 @@ import {
     follow,
     setCurrentPage, setIsFetching,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleFollowingInProgress,
     unfollow,
     UsersDataType
 } from "../../redux/users-reducer";
@@ -22,6 +22,7 @@ type MapStatePropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 type MapDispatchPropsType = {
     follow: (userId: number) => void
@@ -30,6 +31,7 @@ type MapDispatchPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
     setIsFetching: (isFetching: boolean) => void
+    toggleFollowingInProgress: (isFetching: boolean, userId: number)  => void
 }
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -67,6 +69,8 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    unfollow={this.props.unfollow}
                    onPageChanged={this.onPageChanged}
                    isFetching={this.props.isFetching}
+                   followingInProgress={this.props.followingInProgress}
+                   toggleFollowingProgress={this.props.toggleFollowingInProgress}
             />
         </>
     }
@@ -78,7 +82,8 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         pageSize: state.users.pageSize,
         totalUsersCount: state.users.totalUsersCount,
         currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching
+        isFetching: state.users.isFetching,
+        followingInProgress : state.users.followingInProgress
     }
 }
 // let mapDispatchProps = (dispatch: Dispatch): MapDispatchPropsType => {
@@ -105,5 +110,5 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 // }
 export default connect(mapStateToProps, {
     follow, unfollow, setUsers,
-    setCurrentPage, setTotalUsersCount, setIsFetching
+    setCurrentPage, setTotalUsersCount, setIsFetching, toggleFollowingInProgress
 })(UsersContainer);

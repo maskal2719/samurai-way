@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
-import {UsersDataType} from "../../redux/users-reducer";
+import {toggleFollowingInProgress, UsersDataType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 import {usersAPI} from "../../api/api";
@@ -15,6 +15,8 @@ type UsersPropsType = {
     unfollow: (userId: number) => void
     onPageChanged: (currentPage: number) => void
     isFetching: boolean
+    followingInProgress: Array<number>
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
 const Users: React.FC<UsersPropsType> = ({
@@ -25,6 +27,8 @@ const Users: React.FC<UsersPropsType> = ({
                                              follow,
                                              unfollow,
                                              onPageChanged,
+                                             followingInProgress,
+                                             toggleFollowingProgress,
                                              isFetching
                                          }) => {
 
@@ -33,6 +37,7 @@ const Users: React.FC<UsersPropsType> = ({
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+    console.log(followingInProgress)
 
     return (
         <div className={classes.content}>
@@ -45,23 +50,29 @@ const Users: React.FC<UsersPropsType> = ({
                         </NavLink>
                         {el.name}
                         {!el.followed
-                            ? <button onClick={
-                                () => usersAPI.setFollow(el.id)
-                                    .then(data => {
-                                        if (data.resultCode === 0) {
-                                            follow(el.id)
-                                        }
-                                    })
-
+                            ? <button disabled={followingInProgress.some(id => id === el.id)} onClick={
+                                () => {
+                                    toggleFollowingProgress(true, el.id)
+                                    usersAPI.setFollow(el.id)
+                                        .then(data => {
+                                            if (data.resultCode === 0) {
+                                                follow(el.id)
+                                            }
+                                            toggleFollowingProgress(false, el.id)
+                                        })
+                                }
                             }
                             >Follow</button>
-                            : <button onClick={() =>
+                            : <button disabled={followingInProgress.some(id => id === el.id)} onClick={() => {
+                                toggleFollowingProgress(true, el.id)
                                 usersAPI.setUnfollow(el.id)
                                     .then(data => {
                                         if (data.resultCode === 0) {
                                             unfollow(el.id)
                                         }
+                                        toggleFollowingProgress(false, el.id)
                                     })
+                            }
                             }>Unfollow</button>
                         }
                     </div>
