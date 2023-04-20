@@ -1,22 +1,21 @@
 import React from 'react';
 import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
-import {toggleFollowingInProgress, UsersDataType} from "../../redux/users-reducer";
+import {UsersDataType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
     users: UsersDataType[]
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
+    acceptFollow: (userId: number) => void
+    acceptUnfollow: (userId: number) => void
     onPageChanged: (currentPage: number) => void
     isFetching: boolean
     followingInProgress: Array<number>
-    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+    followThunkCreator: (userId: number) => void
+    unfollowThunkCreator: (userId: number) => void
 }
 
 const Users: React.FC<UsersPropsType> = ({
@@ -24,12 +23,13 @@ const Users: React.FC<UsersPropsType> = ({
                                              pageSize,
                                              totalUsersCount,
                                              users,
-                                             follow,
-                                             unfollow,
+                                             acceptUnfollow,
+                                             acceptFollow,
                                              onPageChanged,
                                              followingInProgress,
-                                             toggleFollowingProgress,
-                                             isFetching
+                                             isFetching,
+                                             followThunkCreator,
+                                             unfollowThunkCreator
                                          }) => {
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -51,28 +51,12 @@ const Users: React.FC<UsersPropsType> = ({
                         {el.name}
                         {!el.followed
                             ? <button disabled={followingInProgress.some(id => id === el.id)} onClick={
-                                () => {
-                                    toggleFollowingProgress(true, el.id)
-                                    usersAPI.setFollow(el.id)
-                                        .then(data => {
-                                            if (data.resultCode === 0) {
-                                                follow(el.id)
-                                            }
-                                            toggleFollowingProgress(false, el.id)
-                                        })
-                                }
+                                () => followThunkCreator(el.id)
                             }
                             >Follow</button>
-                            : <button disabled={followingInProgress.some(id => id === el.id)} onClick={() => {
-                                toggleFollowingProgress(true, el.id)
-                                usersAPI.setUnfollow(el.id)
-                                    .then(data => {
-                                        if (data.resultCode === 0) {
-                                            unfollow(el.id)
-                                        }
-                                        toggleFollowingProgress(false, el.id)
-                                    })
-                            }
+                            : <button disabled={followingInProgress.some(id => id === el.id)} onClick={
+                                () => unfollowThunkCreator(el.id)
+
                             }>Unfollow</button>
                         }
                     </div>

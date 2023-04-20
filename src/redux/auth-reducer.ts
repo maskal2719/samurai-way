@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
+
 export type InitialStateType = {
     id: number | null,
     email: string | null,
@@ -35,6 +38,17 @@ export const setAuthUserData = (data: InitialStateType) => ({
     type: SET_USER_DATA,
     data: data
 }) as const
+
+export const authThunkCreator = () => {
+    return (dispatch: Dispatch) => {
+        authAPI.isAuth()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setAuthUserData(data.data))
+                }
+            })
+    }
+}
 
 
 export default authReducer
