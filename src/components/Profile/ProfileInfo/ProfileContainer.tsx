@@ -4,11 +4,12 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {getProfileThunkCreator, ProfileType, setUserProfile} from "../../../redux/profile-reducer";
 import {AppStateType} from "../../../redux/redux-store";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 
 type MapStatePropsType = {
     getProfileThunkCreator: (userId: number) => void
     profile: ProfileType
+    isAuth: boolean
 }
 type MapDispatchPropsType = {}
 export type OwnProfilePropsType = MapStatePropsType & MapDispatchPropsType
@@ -25,6 +26,9 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     }
 
     render() {
+
+        if (!this.props.isAuth) return <Redirect to='/login'/>
+
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         );
@@ -32,7 +36,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 }
 
 let mapStateToProps = (state: AppStateType) => ({
-    profile: state.profile.profile
+    profile: state.profile.profile,
+    isAuth: state.auth.isAuth
 })
 
 // @ts-ignore

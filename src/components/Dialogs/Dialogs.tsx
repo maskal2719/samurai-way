@@ -3,6 +3,7 @@ import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
 type DialogDataType = {
     id: number
@@ -16,17 +17,18 @@ export type MessageDataType = {
 }
 
 
-const Dialogs: React.FC<DialogsPropsType> = ({updateNewMessageText, addNewMessage, dialogsPage}) => {
+const Dialogs: React.FC<DialogsPropsType> = ({updateNewMessageText, addNewMessage, dialogsPage, isAuth}) => {
 
 
-    let dialogsElements = dialogsPage.dialogsData.length ? dialogsPage.dialogsData.map(el => <DialogItem key={el.id} name={el.name}
-                                                                                             id={el.id}
-                                                                                             avatar={el.avatar}
+    let dialogsElements = dialogsPage.dialogsData.length ? dialogsPage.dialogsData.map(el => <DialogItem key={el.id}
+                                                                                                         name={el.name}
+                                                                                                         id={el.id}
+                                                                                                         avatar={el.avatar}
     />) : 'Диалогов нет'
 
     let messagesElements = dialogsPage.messagesData.length ? dialogsPage.messagesData.map(el => <Message key={el.id}
-                                                                                             message={el.message}
-                                                                                             id={el.id}/>) : 'Сообщений нет'
+                                                                                                         message={el.message}
+                                                                                                         id={el.id}/>) : 'Сообщений нет'
 
 
     const newMessageElement: LegacyRef<HTMLTextAreaElement> | undefined = React.createRef()
@@ -38,6 +40,10 @@ const Dialogs: React.FC<DialogsPropsType> = ({updateNewMessageText, addNewMessag
     const onMessageChange = () => {
         const newMessage = newMessageElement.current?.value;
         newMessage && updateNewMessageText(newMessage)
+    }
+
+    if(!isAuth) {
+        return <Redirect to='/login'/>
     }
 
     return (
