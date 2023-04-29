@@ -39,6 +39,7 @@ let mapStateToProps = (state: AppStateType) => ({
     profile: state.profile.profile,
     isAuth: state.auth.isAuth
 })
+    //11123
 
 // @ts-ignore
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
