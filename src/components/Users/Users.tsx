@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "./Users.module.css";
-import userPhoto from "../../assets/images/user.jpg";
+import userPhoto from "../../assets/images/user.jpeg";
 import {UsersDataType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 
