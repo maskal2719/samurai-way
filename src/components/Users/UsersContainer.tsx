@@ -13,6 +13,7 @@ import Users from './Users';
 
 import Preloader from '../common/Preloader/Preloader';
 import {usersAPI} from "../../api/api";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 type MapStatePropsType = {
@@ -100,8 +101,8 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 //         }
 //     }
 // }
-export default connect(mapStateToProps, {
+export default withAuthRedirect(connect(mapStateToProps, {
     acceptFollow, acceptUnfollow, setUsers,
     setCurrentPage, setTotalUsersCount, setIsFetching,
     toggleFollowingInProgress, getUsersThunkCreator,followThunkCreator,unfollowThunkCreator
-})(UsersContainer);
+})(UsersContainer))
