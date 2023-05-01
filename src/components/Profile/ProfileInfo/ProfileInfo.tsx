@@ -7,8 +7,10 @@ import ProfileStatus from "./ProfileStatus";
 
 export type ProfileInfoPropsType = {
     profile: ProfileType
+    status: string
+    updateStatus: (status: string) => void
 }
-const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile}) => {
+const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status,updateStatus}) => {
 
     if (!profile) {
         return <Preloader/>
@@ -19,7 +21,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile}) => {
                 <h3 className={classes.name}>{profile.fullName}</h3>
                 <div className={classes.dop_info}>
                     <div>{profile.aboutMe}</div>
-                    <ProfileStatus profileStatus={'412'}/>
+                    <ProfileStatus status={status} updateStatus={updateStatus}/>
                     <button>Edit</button>
                 </div>
             </div>
