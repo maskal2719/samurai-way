@@ -1,6 +1,11 @@
 import React, {ChangeEvent} from 'react';
 
-class ProfileStatus extends React.Component<any, any> {
+type StatusPropsType = {
+    status: string
+    updateStatus: (newStatus: string) => void
+}
+
+class ProfileStatus extends React.Component<StatusPropsType> {
 
     state = {
         editMode: false,
@@ -26,18 +31,28 @@ class ProfileStatus extends React.Component<any, any> {
         })
     }
 
+    componentDidUpdate(prevProps: Readonly<StatusPropsType>, prevState: Readonly<any>, snapshot?: any) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
+
+
     render() {
         return (
             <div>
                 {
-                    !this.state.editMode
-                        ?
-                        <div>
-                            <span onDoubleClick={() => this.activateEditMode()}>{this.state.status || 'Установите статус'}</span>
+                    this.state.editMode
+                        ? <div>
+                            <input value={this.state.status}
+                                   onBlur={this.deactivateEditMode}
+                                   onChange={this.onStatusChange}
+                                   autoFocus/>
                         </div>
-                        :
-                        <div>
-                            <input onChange={this.onStatusChange} onBlur={() => this.deactivateEditMode()} autoFocus value={this.state.status}/>
+                        : <div>
+                            <span onDoubleClick={this.activateEditMode}>{this.props.status || "no status"}</span>
                         </div>
                 }
             </div>
