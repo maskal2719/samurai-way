@@ -118,7 +118,7 @@ export const updateNewPostTextActionCreator = (newText: string) => ({
     newText: newText
 }) as const
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile: profile}) as const
-export const setStatus = (status: string) => ({type: SET_STATUS, status: status}) as const
+export const setStatus = (status: string) => ({type: SET_STATUS, status}) as const
 export const getProfileThunkCreator = (userId: string | number) => {
     return (dispatch: Dispatch) => {
         usersAPI.getProfile(userId)
@@ -140,7 +140,7 @@ export const updateStatus = (status: string ) => {
         profileAPI.updateStatus(status)
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(setStatus(data))
+                    dispatch(setStatus(status))
                 }
             })
     }
