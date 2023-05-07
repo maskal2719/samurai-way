@@ -4,6 +4,8 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Redirect} from "react-router-dom";
+import AddMessageForm, {FormDataType} from "./AddMessageForm";
+import AddMessageFormReduxForm from "./AddMessageForm";
 
 type DialogDataType = {
     id: number
@@ -17,7 +19,7 @@ export type MessageDataType = {
 }
 
 
-const Dialogs: React.FC<DialogsPropsType> = ({updateNewMessageText, addNewMessage, dialogsPage, isAuth}) => {
+const Dialogs: React.FC<DialogsPropsType> = ({ dialogsPage, isAuth, addNewMessage}) => {
 
 
     let dialogsElements = dialogsPage.dialogsData.length ? dialogsPage.dialogsData.map(el => <DialogItem key={el.id}
@@ -31,17 +33,11 @@ const Dialogs: React.FC<DialogsPropsType> = ({updateNewMessageText, addNewMessag
                                                                                                          id={el.id}/>) : 'Сообщений нет'
 
 
-    const newMessageElement: LegacyRef<HTMLTextAreaElement> | undefined = React.createRef()
 
-    const addNewMessageHandler = () => {
-        addNewMessage()
+    const newMessage = (formData: FormDataType) => {
+        addNewMessage(formData.newMessageBody)
+        console.log(formData.newMessageBody)
     }
-
-    const onMessageChange = () => {
-        const newMessage = newMessageElement.current?.value;
-        newMessage && updateNewMessageText(newMessage)
-    }
-
 
     return (
         <div>
@@ -54,8 +50,7 @@ const Dialogs: React.FC<DialogsPropsType> = ({updateNewMessageText, addNewMessag
                 </div>
             </div>
 
-            <textarea value={dialogsPage.newMessageText} ref={newMessageElement} onChange={onMessageChange}></textarea>
-            <button onClick={addNewMessageHandler}>Send message</button>
+            <AddMessageFormReduxForm onSubmit={newMessage}/>
         </div>
     );
 };

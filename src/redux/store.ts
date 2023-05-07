@@ -3,12 +3,10 @@ import profileReducer, {
     addPostActionCreator,
     FriendsDataType,
     PostDataType,
-    updateNewPostTextActionCreator
 } from "./profile-reducer";
 import dialogsReducer, {
     addNewMessageActionCreator,
     DialogDataType,
-    updateNewMessageTextActionCreator
 } from "./dialogs-reducer";
 
 export type StoreType = {
@@ -35,9 +33,7 @@ export type StateType = {
 
 export type ActionsTypes =
     ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof addNewMessageActionCreator>
-    | ReturnType<typeof updateNewMessageTextActionCreator>
 
 
 const store: StoreType = {

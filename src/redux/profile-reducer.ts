@@ -39,20 +39,17 @@ export type Photos = {
 export type InitialStateType = {
     friendsData: Array<FriendsDataType>
     postsData: Array<PostDataType>
-    newPostText: string
     profile: ProfileType | null
     status: string
 }
 
 export type ActionsType =
     ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
 
 
 const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
 
@@ -75,7 +72,6 @@ let initialState: InitialStateType = {
         {id: 3, message: 'I`m fine', like: 12},
         {id: 4, message: 'And you?', like: 151},
     ] as Array<PostDataType>,
-    newPostText: 'gav-gav',
     profile: null,
     status: ''
 }
@@ -84,18 +80,12 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
         case ADD_POST:
             let newPost = {
                 id: state.postsData.length + 1,
-                message: state.newPostText,
+                message: action.newPostBody,
                 like: Math.floor(Math.random() * 100)
             }
             return {
                 ...state,
                 postsData: [newPost, ...state.postsData],
-                newPostText: ''
-            }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
             }
         case SET_USER_PROFILE: {
             return {
@@ -112,18 +102,14 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST}) as const
-export const updateNewPostTextActionCreator = (newText: string) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: newText
-}) as const
+export const addPostActionCreator = (newPostBody: string) => ({type: ADD_POST, newPostBody}) as const
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile: profile}) as const
 export const setStatus = (status: string) => ({type: SET_STATUS, status}) as const
 export const getProfileThunkCreator = (userId: string | number) => {
     return (dispatch: Dispatch) => {
         usersAPI.getProfile(userId)
             .then(data => {
-                    dispatch(setUserProfile(data))
+                dispatch(setUserProfile(data))
             })
     }
 }
@@ -131,11 +117,11 @@ export const getStatus = (userId: string | number) => {
     return (dispatch: Dispatch) => {
         profileAPI.getStatus(userId)
             .then(data => {
-                    dispatch(setStatus(data))
+                dispatch(setStatus(data))
             })
     }
 }
-export const updateStatus = (status: string ) => {
+export const updateStatus = (status: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.updateStatus(status)
             .then(data => {
