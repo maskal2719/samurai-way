@@ -37,6 +37,14 @@ const Users: React.FC<UsersPropsType> = ({
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+
+    let slicedPages;
+    const curPage = currentPage;
+    if (curPage - 3 < 0) {
+        slicedPages = pages.slice(0, 9);
+    } else {
+        slicedPages = pages.slice(curPage - 5, curPage + 4);
+    }
     console.log(followingInProgress)
 
     return (
@@ -63,11 +71,17 @@ const Users: React.FC<UsersPropsType> = ({
                 ) : <div>У тебя Нет друзей,потому что ты мудак :)))</div>}
             </div>
             <div className={classes.pagination}>
-                {
-                    pages.map((el) => <span key={el} onClick={() => {
-                        onPageChanged(el)
-                    }} className={currentPage === el ? classes.selectedPage : ''}>{el}</span>)
-                }
+                {/*{*/}
+                {/*    pages.map((el) => <span key={el} onClick={() => {*/}
+                {/*        onPageChanged(el)*/}
+                {/*    }} className={currentPage === el ? classes.selectedPage : ''}>{el}</span>)*/}
+                {/*}*/}
+                {slicedPages.map((el, index) => {
+                    return (
+                        <span key={index} onClick={() => onPageChanged((el))}
+                              className={currentPage === el ? classes.selectedPage : ""}>{el}</span>
+                    )
+                })}
                 <span className={classes.selectedPage}></span>
             </div>
         </div>

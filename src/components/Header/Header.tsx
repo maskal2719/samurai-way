@@ -2,15 +2,15 @@ import React, {FC} from 'react';
 import './Header.module.css';
 import classes from "./Header.module.css";
 import {NavLink} from "react-router-dom";
-import {InitialStateType} from "../../redux/auth-reducer";
+import {InitialStateType, logoutThunkCreator} from "../../redux/auth-reducer";
 
 type HeaderPropsType = {
     login: string | null
     isAuth: boolean
+    logoutThunkCreator: () => void
 }
 
-const Header: FC<HeaderPropsType> = ({ isAuth, login}) => {
-    console.log(login)
+const Header: FC<HeaderPropsType> = ({ isAuth, login, logoutThunkCreator}) => {
     return (
         <header className={classes.header}>
             <img className={classes.header_logo}
@@ -20,7 +20,10 @@ const Header: FC<HeaderPropsType> = ({ isAuth, login}) => {
             {
                 isAuth
                     ?
-                    login
+                    <div>
+                        {login}
+                        <button className={classes.login_btn} onClick={logoutThunkCreator}>Logout</button>
+                    </div>
                     :
                     <button className={classes.login_btn}>
                         <NavLink to={'/login'}>Login</NavLink>

@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import {authThunkCreator, InitialStateType} from "../../redux/auth-reducer";
+import {authThunkCreator, InitialStateType, logoutThunkCreator} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 
@@ -10,6 +10,7 @@ type HeaderContainerPropsType = {
     isAuth: boolean
     login: string | null
     authThunkCreator: () => void
+    logoutThunkCreator: () => void
 }
 export type MapStateToPropsType = {
     data: InitialStateType
@@ -38,4 +39,4 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-export default connect(mapStateToProps, {authThunkCreator})(HeaderContainer)
+export default connect(mapStateToProps, {authThunkCreator, logoutThunkCreator})(HeaderContainer)
