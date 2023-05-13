@@ -8,7 +8,7 @@ export type FormDataType = {
     newPostBody: string
 }
 
-const maxLength10 = maxLengthCreator(10)
+const maxLength100 = maxLengthCreator(100)
 
 const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit}) => {
     return (
@@ -16,7 +16,7 @@ const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit
             <form onSubmit={handleSubmit}>
                 <div className={classes.new_post}>
                     <Field component={Textarea} name={'newPostBody'} placeholder={'Enter your post message'}
-                           validate={[requiredField, maxLength10]}/>
+                           validate={[requiredField, maxLength100]}/>
                     <button>Publish</button>
                 </div>
             </form>
