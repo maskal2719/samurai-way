@@ -2,6 +2,7 @@ import {AnyAction, Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 export type InitialStateType = {
     id: number | null,
@@ -58,6 +59,10 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(authThunkCreator())
+                } else {
+                    console.log(data)
+                    let message = data.messages.length > 0 ? data.messages[0] : 'Some error'
+                    dispatch(stopSubmit('login', {_error: message}))
                 }
             })
     }
@@ -68,7 +73,7 @@ export const logoutThunkCreator = () => {
         authAPI.logout()
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(setAuthUserData(null,null,null,false))
+                    dispatch(setAuthUserData(null, null, null, false))
                 }
             })
     }
