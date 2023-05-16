@@ -5,13 +5,15 @@ import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
 import thunk from "redux-thunk";
 import {reducer as formReduce} from "redux-form";
+import appReducer from "./app-reducer";
 
 let rootReducer = combineReducers({
     profile: profileReducer,
     dialogs: dialogsReducer,
     users: usersReducer,
     auth: authReducer,
-    form: formReduce
+    form: formReduce,
+    app: appReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>

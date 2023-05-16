@@ -14,18 +14,27 @@ import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {authThunkCreator} from "./redux/auth-reducer";
 import {compose} from "redux";
+import {initializeApp} from "./redux/app-reducer";
+import {AppStateType} from "./redux/redux-store";
+import Preloader from "./components/common/Preloader/Preloader";
 
 
 type AppPropsType = {
-    authThunkCreator: () => void
+    initialized: boolean
+    initializeApp: () => void
 }
 
 class App extends React.Component<AppPropsType> {
     componentDidMount() {
-        this.props.authThunkCreator()
+        this.props.initializeApp()
     }
 
     render() {
+
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
+
         return (
             <BrowserRouter>
                 <div className="container">
@@ -57,5 +66,8 @@ class App extends React.Component<AppPropsType> {
     }
 }
 
+const mapStateToProps = (state: AppStateType) => ({
+    initialized: state.app.initialized
+})
 
-export default compose<React.ComponentType>(connect(null, {authThunkCreator}), withRouter)(App)
+export default connect(mapStateToProps, {initializeApp})(App)
