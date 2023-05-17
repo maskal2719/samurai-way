@@ -15,7 +15,14 @@ import Preloader from '../common/Preloader/Preloader';
 import {usersAPI} from "../../api/api";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {getCurrentPage, getIsFetching, getPageSize, getTotalUsersCount, getUsers} from "../../redux/users-selectors";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../redux/users-selectors";
 
 
 type MapStatePropsType = {
@@ -89,7 +96,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
-        followingInProgress: state.users.followingInProgress
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 export default compose<React.ComponentType>(
